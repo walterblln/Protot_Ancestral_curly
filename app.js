@@ -87,6 +87,7 @@ document.addEventListener('DOMContentLoaded', () => {
   renderProducts();
   setupEventListeners();
   setupSmoothNavigation();
+  setupNavSlider();
   setDefaultBookingDate();
 });
 
@@ -702,10 +703,15 @@ function setupSmoothNavigation() {
             behavior: 'smooth'
           });
 
-          // Actualizar botón activo de navegación
+          // Actualizar botón activo de navegación y centrarlo suavemente en la barra
           document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
           const currentNavLink = document.querySelector(`.nav-menu .nav-link[href="${targetId}"]`);
-          if (currentNavLink) currentNavLink.classList.add('active');
+          if (currentNavLink) {
+            currentNavLink.classList.add('active');
+            try {
+              currentNavLink.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+            } catch (err) {}
+          }
 
           // Conexión visual sutil sin modificar el flujo de la página
           targetSection.classList.remove('section-active-pulse');
@@ -718,6 +724,55 @@ function setupSmoothNavigation() {
       }
     });
   });
+}
+
+// ==========================================================================
+// CONTROLADOR DE DESLIZAMIENTO DE BOTONES (MÓVIL / TABLET)
+// ==========================================================================
+function setupNavSlider() {
+  const container = document.getElementById('navScrollContainer');
+  const prevBtn = document.getElementById('navArrowLeft');
+  const nextBtn = document.getElementById('navArrowRight');
+  const wrapper = document.getElementById('navSliderWrapper');
+  if (!container) return;
+
+  function updateArrows() {
+    if (!prevBtn || !nextBtn) return;
+    const maxScroll = container.scrollWidth - container.clientWidth;
+    if (maxScroll <= 8) {
+      prevBtn.style.display = 'none';
+      nextBtn.style.display = 'none';
+      if (wrapper) wrapper.classList.remove('has-overflow');
+      return;
+    }
+
+    if (wrapper) wrapper.classList.add('has-overflow');
+    prevBtn.style.display = container.scrollLeft > 10 ? 'flex' : 'none';
+    nextBtn.style.display = container.scrollLeft < maxScroll - 10 ? 'flex' : 'none';
+  }
+
+  container.addEventListener('scroll', updateArrows, { passive: true });
+  window.addEventListener('resize', updateArrows);
+
+  if (prevBtn) {
+    prevBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      container.scrollBy({ left: -140, behavior: 'smooth' });
+    });
+  }
+
+  if (nextBtn) {
+    nextBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      container.scrollBy({ left: 140, behavior: 'smooth' });
+    });
+  }
+
+  // Comprobar estado inicial y tras cargar fuentes / estilos
+  setTimeout(updateArrows, 150);
+  setTimeout(updateArrows, 600);
 }
 
 // ==========================================================================

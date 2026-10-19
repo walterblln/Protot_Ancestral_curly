@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>(Ancestral Curly - Academia) | Asesorías Especializadas & Botica Natural</title>
   <meta name="description" content="Centro de asesoría especializada en cabello ondulado, rizado y afro. Punto físico en Ciénaga (Magdalena) y atención virtual nacional. Diagnóstico capilar, talleres y productos certificados.">
-  <link rel="stylesheet" href="styles.css?v=2.5">
+  <link rel="stylesheet" href="styles.css?v=2.6">
   <!-- FontAwesome Icons for crisp UI icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
@@ -26,15 +26,23 @@
         </div>
       </a>
 
-      <nav>
-        <ul class="nav-menu" id="navMenu">
-          <li><a href="#inicio" class="nav-link active">Inicio</a></li>
-          <li><a href="#transicion" class="nav-link">Transición</a></li>
-          <li><a href="#diagnostico" class="nav-link">Diagnóstico</a></li>
-          <li><a href="#botica" class="nav-link">Botica Natural</a></li>
-          <li><a href="#tecnicas" class="nav-link">Secretos del Rizo</a></li>
-          <li><a href="#testimonios" class="nav-link">Testimonios</a></li>
-        </ul>
+      <nav class="nav-slider-wrapper" id="navSliderWrapper">
+        <button class="nav-arrow-btn nav-arrow-left" id="navArrowLeft" aria-label="Ver botones anteriores" style="display: none;">
+          <i class="fa-solid fa-chevron-left"></i>
+        </button>
+        <div class="nav-scroll-container" id="navScrollContainer">
+          <ul class="nav-menu" id="navMenu">
+            <li><a href="#inicio" class="nav-link active">Inicio</a></li>
+            <li><a href="#transicion" class="nav-link">Transición</a></li>
+            <li><a href="#diagnostico" class="nav-link">Diagnóstico</a></li>
+            <li><a href="#botica" class="nav-link">Botica Natural</a></li>
+            <li><a href="#tecnicas" class="nav-link">Secretos del Rizo</a></li>
+            <li><a href="#testimonios" class="nav-link">Testimonios</a></li>
+          </ul>
+        </div>
+        <button class="nav-arrow-btn nav-arrow-right" id="navArrowRight" aria-label="Ver más botones">
+          <i class="fa-solid fa-chevron-right"></i>
+        </button>
       </nav>
 
       <div class="nav-actions">
