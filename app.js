@@ -713,11 +713,7 @@ function setupSmoothNavigation() {
           targetSection.classList.add('section-active-pulse');
           setTimeout(() => targetSection.classList.remove('section-active-pulse'), 800);
 
-          // Si el menú móvil está abierto, cerrarlo
-          const navMenu = document.getElementById('navMenu');
-          if (navMenu && window.innerWidth <= 992) {
-            navMenu.style.display = 'none';
-          }
+          // Enlace clickeado correctamente
         }
       }
     });
