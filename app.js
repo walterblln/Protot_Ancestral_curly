@@ -740,15 +740,33 @@ function setupNavSlider() {
     if (!prevBtn || !nextBtn) return;
     const maxScroll = container.scrollWidth - container.clientWidth;
     if (maxScroll <= 8) {
-      prevBtn.style.display = 'none';
-      nextBtn.style.display = 'none';
-      if (wrapper) wrapper.classList.remove('has-overflow');
+      prevBtn.classList.remove('is-visible');
+      nextBtn.classList.remove('is-visible');
+      if (wrapper) {
+        wrapper.classList.remove('has-overflow');
+        wrapper.classList.remove('has-left-overflow');
+      }
       return;
     }
 
-    if (wrapper) wrapper.classList.add('has-overflow');
-    prevBtn.style.display = container.scrollLeft > 10 ? 'flex' : 'none';
-    nextBtn.style.display = container.scrollLeft < maxScroll - 10 ? 'flex' : 'none';
+    // Flecha izquierda: se muestra ÚNICAMENTE si el usuario se ha desplazado más de 20px
+    // Así el botón de "Inicio" nunca se traslapa ni se tapa de entrada
+    if (container.scrollLeft > 20) {
+      prevBtn.classList.add('is-visible');
+      if (wrapper) wrapper.classList.add('has-left-overflow');
+    } else {
+      prevBtn.classList.remove('is-visible');
+      if (wrapper) wrapper.classList.remove('has-left-overflow');
+    }
+
+    // Flecha derecha: visible mientras queden botones por descubrir
+    if (container.scrollLeft < maxScroll - 20) {
+      nextBtn.classList.add('is-visible');
+      if (wrapper) wrapper.classList.add('has-overflow');
+    } else {
+      nextBtn.classList.remove('is-visible');
+      if (wrapper) wrapper.classList.remove('has-overflow');
+    }
   }
 
   container.addEventListener('scroll', updateArrows, { passive: true });
@@ -758,7 +776,7 @@ function setupNavSlider() {
     prevBtn.addEventListener('click', (e) => {
       e.preventDefault();
       e.stopPropagation();
-      container.scrollBy({ left: -140, behavior: 'smooth' });
+      container.scrollBy({ left: -160, behavior: 'smooth' });
     });
   }
 
@@ -766,13 +784,13 @@ function setupNavSlider() {
     nextBtn.addEventListener('click', (e) => {
       e.preventDefault();
       e.stopPropagation();
-      container.scrollBy({ left: 140, behavior: 'smooth' });
+      container.scrollBy({ left: 160, behavior: 'smooth' });
     });
   }
 
   // Comprobar estado inicial y tras cargar fuentes / estilos
-  setTimeout(updateArrows, 150);
-  setTimeout(updateArrows, 600);
+  setTimeout(updateArrows, 100);
+  setTimeout(updateArrows, 400);
 }
 
 // ==========================================================================
