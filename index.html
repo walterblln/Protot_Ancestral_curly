@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>(Ancestral Curly - Academia) | Asesorías Especializadas & Botica Natural</title>
+  <title>(Ancestral Curly - Academia) | Asesorías Especializadas & Catálogo de Productos</title>
   <meta name="description" content="Centro de asesoría especializada en cabello ondulado, rizado y afro. Punto físico en Ciénaga (Magdalena) y atención virtual nacional. Diagnóstico capilar, talleres y productos certificados.">
-  <link rel="stylesheet" href="styles.css?v=2.8">
+  <link rel="stylesheet" href="styles.css?v=3.0">
   <!-- FontAwesome Icons for crisp UI icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
@@ -35,7 +35,7 @@
             <li><a href="#inicio" class="nav-link active">Inicio</a></li>
             <li><a href="#transicion" class="nav-link">Transición</a></li>
             <li><a href="#diagnostico" class="nav-link">Diagnóstico</a></li>
-            <li><a href="#botica" class="nav-link">Botica Natural</a></li>
+            <li><a href="#botica" class="nav-link" title="Catálogo de Productos Recomendados">Productos</a></li>
             <li><a href="#tecnicas" class="nav-link">Secretos del Rizo</a></li>
             <li><a href="#testimonios" class="nav-link">Testimonios</a></li>
           </ul>
@@ -88,8 +88,8 @@
             <span>Consultar y Agendar Asesoría</span>
           </button>
           <a href="#botica" class="btn btn-secondary" id="heroShopBtn">
-            <i class="fa-solid fa-mortar-pestle"></i>
-            <span>Explorar Botica Natural</span>
+            <i class="fa-solid fa-leaf"></i>
+            <span>Ver Productos Recomendados</span>
           </a>
         </div>
 
@@ -574,35 +574,28 @@
   </section>
 
   <!-- ==========================================================================
-       BOTICA DE PRODUCTOS NATURALES (VENTA Y GESTIÓN)
+       CATÁLOGO DE PRODUCTOS RECOMENDADOS / PRODUCTOS A LA VENTA
        ========================================================================== -->
   <section class="products-section" id="botica">
     <div class="container">
       <div class="section-header">
         <span class="badge-pill badge-green section-tag">
-          <i class="fa-solid fa-mortar-pestle"></i> Botica Ancestral Consciente
+          <i class="fa-solid fa-leaf"></i> Productos a la Venta
         </span>
-        <h2 class="section-title">Productos Certificados para <em>Cuidado & Transición</em></h2>
+        <h2 class="section-title">Catálogo de <em>Productos Recomendados</em></h2>
         <p class="section-description">
-          Fórmulas botánicas artesanales y distribución de marcas certificadas aptas (libres de sulfatos agresivos, siliconas insolubles y petrolatos). Adaptadas a las necesidades del clima caribeño.
+          Fórmulas botánicas artesanales y productos seleccionados aptos para ondas, rizos y afros. Libres de sulfatos agresivos, siliconas insolubles y petrolatos.
         </p>
       </div>
 
-      <!-- Toolbar / Filters & Add Product Action -->
+      <!-- Toolbar / Filters -->
       <div class="products-toolbar">
         <div class="filter-tabs" id="filterTabs">
           <button class="filter-tab active" data-category="todos" onclick="filterProducts('todos', this)">Todos</button>
-          <button class="filter-tab" data-category="shampoos" onclick="filterProducts('shampoos', this)">Shampoos</button>
-          <button class="filter-tab" data-category="tratamientos" onclick="filterProducts('tratamientos', this)">Tratamientos</button>
-          <button class="filter-tab" data-category="activadores" onclick="filterProducts('activadores', this)">Activadores & Sérums</button>
-          <button class="filter-tab" data-category="accesorios" onclick="filterProducts('accesorios', this)">Accesorios</button>
-        </div>
-
-        <div class="products-actions-bar">
-          <button class="add-product-btn" id="openAddProductModalBtn" onclick="openAddProductModal()">
-            <i class="fa-solid fa-plus"></i>
-            <span>Agregar Producto para la Venta</span>
-          </button>
+          <button class="filter-tab" data-category="shampoos" onclick="filterProducts('shampoos', this)">Shampoo</button>
+          <button class="filter-tab" data-category="tratamientos" onclick="filterProducts('tratamientos', this)">Tratamiento</button>
+          <button class="filter-tab" data-category="aceites" onclick="filterProducts('aceites', this)">Aceite</button>
+          <button class="filter-tab" data-category="cremas" onclick="filterProducts('cremas', this)">Crema de Peinar</button>
         </div>
       </div>
 
@@ -771,12 +764,12 @@
         </div>
 
         <div class="footer-col">
-          <h4>Botica Certificada</h4>
+          <h4>Productos Recomendados</h4>
           <ul class="footer-links">
-            <li><a href="#botica" onclick="filterProducts('shampoos')">Shampoos Suaves</a></li>
-            <li><a href="#botica" onclick="filterProducts('tratamientos')">Mascarillas Nutritivas</a></li>
-            <li><a href="#botica" onclick="filterProducts('activadores')">Sérums & Activadores</a></li>
-            <li><a href="#botica" onclick="openAddProductModal()">Publicar un Producto</a></li>
+            <li><a href="#botica" onclick="filterProducts('shampoos')">Shampoo</a></li>
+            <li><a href="#botica" onclick="filterProducts('tratamientos')">Tratamiento</a></li>
+            <li><a href="#botica" onclick="filterProducts('aceites')">Aceite</a></li>
+            <li><a href="#botica" onclick="filterProducts('cremas')">Crema de Peinar</a></li>
           </ul>
         </div>
 
@@ -786,7 +779,7 @@
             <li><i class="fa-solid fa-location-dot"></i> Punto Físico: Ciénaga (Magdalena)</li>
             <li><i class="fa-solid fa-map-pin"></i> Cobertura: Santa Marta & Magdalena</li>
             <li><i class="fa-solid fa-laptop"></i> Atención Virtual en toda Colombia</li>
-            <li><i class="fa-brands fa-whatsapp"></i> Atención Directa vía WhatsApp</li>
+            <li><i class="fa-brands fa-whatsapp"></i> <a href="https://wa.me/573138106274" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: underline;">WhatsApp: 313 810 6274</a></li>
             <li><i class="fa-solid fa-calendar-check"></i> Sesiones con cita coordinada</li>
           </ul>
         </div>
@@ -801,86 +794,6 @@
       </div>
     </div>
   </footer>
-
-  <!-- ==========================================================================
-       MODAL: AGREGAR PRODUCTO PARA LA VENTA
-       ========================================================================== -->
-  <div class="modal-overlay" id="addProductModal">
-    <div class="modal-container">
-      <div class="modal-header">
-        <div class="modal-title-wrap">
-          <h3>Agregar Producto para la Venta</h3>
-          <p>Publica un nuevo shampoo, tratamiento natural o producto certificado en la botica.</p>
-        </div>
-        <button class="modal-close-btn" onclick="closeAddProductModal()" aria-label="Cerrar modal">
-          <i class="fa-solid fa-xmark"></i>
-        </button>
-      </div>
-
-      <div class="modal-body">
-        <form id="addProductForm" onsubmit="handleCreateProduct(event)">
-          <div class="form-group">
-            <label class="form-label" for="prodTitle">Nombre del Producto *</label>
-            <input type="text" id="prodTitle" class="form-input" placeholder="Ej: Gel de Linaza y Aloe Vera Puro" required>
-          </div>
-
-          <div class="form-row">
-            <div class="form-group">
-              <label class="form-label" for="prodCategory">Categoría *</label>
-              <select id="prodCategory" class="form-select" required>
-                <option value="shampoos">Shampoos</option>
-                <option value="tratamientos">Tratamientos & Mascarillas</option>
-                <option value="activadores">Activadores & Sérums</option>
-                <option value="accesorios">Accesorios</option>
-              </select>
-            </div>
-
-            <div class="form-group">
-              <label class="form-label" for="prodPrice">Precio Referencial (Opcional para el futuro)</label>
-              <input type="number" id="prodPrice" class="form-input" placeholder="Ej: 38000" min="0" step="500">
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label class="form-label" for="prodBotanical">Ingrediente Activo / Certificación *</label>
-            <input type="text" id="prodBotanical" class="form-input" placeholder="Ej: Semillas de Linaza, Romero & Libre de Sulfatos" required>
-          </div>
-
-          <div class="form-group">
-            <label class="form-label" for="prodDesc">Pequeña Descripción del Producto *</label>
-            <textarea id="prodDesc" class="form-textarea" rows="3" placeholder="Describe los beneficios para ondas, rizos o afros, cómo aplicarlo y resultados..." required></textarea>
-          </div>
-
-          <div class="form-group">
-            <label class="form-label">Imagen del Producto *</label>
-            <div style="display: flex; gap: 0.8rem; margin-bottom: 0.6rem;">
-              <input type="file" id="prodImageFile" accept="image/*" style="display: none;" onchange="handleImageFileUpload(event)">
-              <button type="button" class="btn btn-secondary btn-sm" onclick="document.getElementById('prodImageFile').click()">
-                <i class="fa-solid fa-upload"></i> Subir desde tu equipo
-              </button>
-              <button type="button" class="btn btn-secondary btn-sm" onclick="usePresetSampleImage()">
-                <i class="fa-solid fa-wand-magic-sparkles"></i> Usar muestra botánica
-              </button>
-            </div>
-            <input type="url" id="prodImageUrl" class="form-input" placeholder="O pega una URL de imagen (https://...)" oninput="updateImagePreview(this.value)">
-
-            <div class="image-preview-box" id="imagePreviewContainer" onclick="document.getElementById('prodImageFile').click()">
-              <i class="fa-regular fa-image" style="font-size: 2.2rem;" id="previewPlaceholderIcon"></i>
-              <span id="previewPlaceholderText">Haz clic para subir imagen o ingresa una URL</span>
-              <img src="" alt="Previsualización" id="previewImgElement" style="display: none;">
-            </div>
-          </div>
-
-          <div style="display: flex; gap: 1rem; margin-top: 1.5rem;">
-            <button type="button" class="btn btn-secondary" style="flex: 1;" onclick="closeAddProductModal()">Cancelar</button>
-            <button type="submit" class="btn btn-primary" style="flex: 2;">
-              <i class="fa-solid fa-plus"></i> Publicar en la Botica
-            </button>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
 
   <!-- ==========================================================================
        MODAL: RESERVA DE ASESORÍA PERSONALIZADA
@@ -979,12 +892,16 @@
         <span>Artículos en tu lista:</span>
         <span class="cart-inquiry-badge" id="cartItemCountLabel">0 seleccionados</span>
       </div>
+      <div style="display: flex; justify-content: space-between; align-items: center; padding: 0.6rem 0; border-top: 1px dashed var(--border-medium); margin-top: 0.4rem;">
+        <span style="font-size: 0.95rem; font-weight: 700; color: var(--text-main);">Total Estimado:</span>
+        <span style="font-size: 1.25rem; font-weight: 800; color: var(--primary);" id="cartTotalPriceLabel">$ 0</span>
+      </div>
       <p class="cart-note">
-        <i class="fa-solid fa-comment-dots"></i> Consulta disponibilidad, opciones de envío local en Magdalena o nacional y asesoría de uso por WhatsApp.
+        <i class="fa-brands fa-whatsapp" style="color: #25D366;"></i> Coordinamos disponibilidad, asesoría y envío directo a tu WhatsApp: <strong>313 810 6274</strong>.
       </p>
       <button class="btn btn-primary" style="width: 100%;" onclick="checkoutViaWhatsApp()">
         <i class="fa-brands fa-whatsapp"></i>
-        <span>¡Consultar Productos por WhatsApp!</span>
+        <span>¡Pedir por WhatsApp!</span>
       </button>
       <button class="btn btn-secondary btn-sm" style="width: 100%; margin-top: 0.35rem;" onclick="clearCart()">
         <i class="fa-regular fa-trash-can"></i> Limpiar Lista
@@ -1005,7 +922,18 @@
     <div class="toast-message" id="toastMessage">Producto añadido a tu lista</div>
   </div>
 
+  <!-- Floating WhatsApp Action Button (3138106274) -->
+  <a href="https://wa.me/573138106274?text=%C2%A1Hola%20(Ancestral%20Curly%20-%20Academia)!%20%F0%9F%8C%BF%20Deseo%20solicitar%20informaci%C3%B3n%20y%20asesor%C3%ADa." 
+     class="whatsapp-float-btn" 
+     target="_blank" 
+     rel="noopener noreferrer" 
+     aria-label="Atención directa por WhatsApp 3138106274"
+     title="Escríbenos a WhatsApp (313 810 6274)">
+    <i class="fa-brands fa-whatsapp"></i>
+    <span class="whatsapp-float-tooltip">WhatsApp: 313 810 6274</span>
+  </a>
+
   <!-- Scripts -->
-  <script src="app.js?v=2.3"></script>
+  <script src="app.js?v=2.5"></script>
 </body>
 </html>

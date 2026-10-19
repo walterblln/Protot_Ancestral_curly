@@ -6,64 +6,53 @@
 
 // Configuration & Marketing Settings
 const CONFIG = {
-  // Flag para ocultar precios actualmente mientras se cotiza / marketing por consulta.
-  // Cuando se desee activar precios públicos en el futuro, solo cambiar a true.
-  showPrices: false,
+  // Precios públicos visibles para el catálogo de productos
+  showPrices: true,
   
-  // Número de WhatsApp oficial (se deja dinámico si aún no está asignado)
-  whatsappNumber: "" 
+  // Número de WhatsApp oficial para solicitudes y cotizaciones
+  whatsappNumber: "573138106274" 
 };
 
-// 1. Initial State & Default Catalog (con precios base preparados para el futuro)
+// 1. Initial State & Default Catalog (Exactamente 4 categorías y 4 productos solicitados)
 const INITIAL_PRODUCTS = [
   {
-    id: "prod-1",
-    title: "Shampoo Equilibrante de Romero & Shikakai",
+    id: "prod-shampoo",
+    title: "Shampoo Botánico Equilibrante",
     category: "shampoos",
-    price: 38000,
-    botanical: "Extracto de Romero & Fruto Shikakai • Libre de Sulfatos",
-    desc: "Limpieza suave que estimula el cuero cabelludo sin resecar. Ideal para la transición capilar y para retirar acumulaciones en climas cálidos y húmedos.",
+    price: 25000,
+    botanical: "Romero, Shikakai & Aloe Vera • Libre de Sulfatos",
+    desc: "Limpieza suave y respetuosa que retira impurezas y exceso de sebo sin resecar los aceites naturales de tus ondas y rizos.",
     image: "assets/images/shampoo.jpg",
     isCustom: false
   },
   {
-    id: "prod-2",
-    title: "Mascarilla Hidronutritiva de Murumuru & Linaza",
+    id: "prod-tratamiento",
+    title: "Tratamiento Mascarilla Hidronutritiva",
     category: "tratamientos",
-    price: 48000,
+    price: 35000,
     botanical: "Manteca de Murumuru Amazónica & Mucílago de Linaza",
-    desc: "Nutrición profunda para recuperar cutículas abiertas por alisados químicos previos (estilo CARMEL). Aporta suavidad, brillo y desenredo fácil sin dolor.",
+    desc: "Nutrición profunda para recuperar cutículas abiertas, reparar hebras quebradizas y devolver elasticidad y desenredo fácil sin dolor.",
     image: "assets/images/mascarilla.jpg",
     isCustom: false
   },
   {
-    id: "prod-3",
-    title: "Sérum Activador de Ondas & Rizos con Argán y Aloe",
-    category: "activadores",
-    price: 42000,
-    botanical: "Aceite de Argán Prensado en Frío & Gel de Aloe Orgánico",
-    desc: "Fórmula ingrávida que sella la humedad y protege la hebra del calor ambiental del Caribe. Define la forma natural en 'S' y los bucles elásticos sin apelmazar.",
+    id: "prod-aceite",
+    title: "Aceite Botánico Nutritivo & Sellador",
+    category: "aceites",
+    price: 30000,
+    botanical: "Argán Puro Prensado en Frío, Jojoba & Esencia de Romero",
+    desc: "Elixir ligero que sella la hidratación dentro de la hebra capilar, combate el frizz frente a la humedad del clima y aporta un brillo radiante.",
     image: "assets/images/serum.jpg",
     isCustom: false
   },
   {
-    id: "prod-4",
-    title: "Bruma Hidratante Revitalizadora con Té Verde & Rosas",
-    category: "activadores",
-    price: 32000,
-    botanical: "Hidrolato de Rosas & Té Verde Antioxidante",
-    desc: "El elixir ideal para reactivar ondas y rizos al segundo o tercer día frente a la humedad del Magdalena, sin necesidad de lavar con shampoo nuevamente.",
-    image: "assets/images/shampoo.jpg",
-    isCustom: false
-  },
-  {
-    id: "prod-5",
-    title: "Gorro y Funda de Satén Mulberry Ancestral",
-    category: "accesorios",
-    price: 35000,
-    botanical: "Fibra de Satén de Alta Densidad",
-    desc: "Accesorio imprescindible para preservar la definición durante la noche. Reduce la fricción, previene el frizz nocturno y evita el quiebre de la hebra.",
-    image: "assets/images/hero.jpg",
+    id: "prod-crema",
+    title: "Crema de Peinar Definición Profunda (Grande)",
+    category: "cremas",
+    price: 37000,
+    botanical: "Linaza Dorada & Manteca de Karité • Presentación Grande",
+    desc: "Presentación grande de máxima duración y rendimiento. Moldea y define ondas, rizos y afros con fijación flexible y movimiento natural sin acartonar.",
+    image: "assets/images/crema.jpg",
     isCustom: false
   }
 ];
@@ -92,7 +81,8 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function loadProducts() {
-  const stored = localStorage.getItem('ancestral_curly_products');
+  const storageKey = 'ancestral_curly_products_v5';
+  const stored = localStorage.getItem(storageKey);
   if (stored) {
     try {
       products = JSON.parse(stored);
@@ -101,29 +91,37 @@ function loadProducts() {
       products = [...INITIAL_PRODUCTS];
     }
   } else {
+    // Limpieza de versiones anteriores para asegurar catálogo oficial de 4 productos
+    localStorage.removeItem('ancestral_curly_products');
+    localStorage.removeItem('ancestral_curly_products_v4');
     products = [...INITIAL_PRODUCTS];
     saveProducts();
   }
 }
 
 function saveProducts() {
-  localStorage.setItem('ancestral_curly_products', JSON.stringify(products));
+  localStorage.setItem('ancestral_curly_products_v5', JSON.stringify(products));
 }
 
 function loadCart() {
-  const stored = localStorage.getItem('ancestral_curly_cart');
+  const storageKey = 'ancestral_curly_cart_v5';
+  const stored = localStorage.getItem(storageKey);
   if (stored) {
     try {
       cart = JSON.parse(stored);
     } catch (e) {
       cart = [];
     }
+  } else {
+    localStorage.removeItem('ancestral_curly_cart');
+    localStorage.removeItem('ancestral_curly_cart_v4');
+    cart = [];
   }
   updateCartBadge();
 }
 
 function saveCart() {
-  localStorage.setItem('ancestral_curly_cart', JSON.stringify(cart));
+  localStorage.setItem('ancestral_curly_cart_v5', JSON.stringify(cart));
   updateCartBadge();
 }
 
@@ -151,11 +149,11 @@ function renderProducts() {
   if (filtered.length === 0) {
     grid.innerHTML = `
       <div class="empty-products">
-        <i class="fa-solid fa-seedling" style="font-size: 3rem; color: var(--primary); margin-bottom: 1rem;"></i>
+        <i class="fa-solid fa-leaf" style="font-size: 3rem; color: var(--primary); margin-bottom: 1rem;"></i>
         <h3 style="font-family: var(--font-serif); font-size: 1.5rem; margin-bottom: 0.5rem;">No hay productos en esta categoría</h3>
-        <p style="color: var(--text-muted); margin-bottom: 1.5rem;">Sé la primera persona en publicar un producto certificado o botánico en esta sección.</p>
-        <button class="btn btn-primary" onclick="openAddProductModal()">
-          <i class="fa-solid fa-plus"></i> Agregar Nuevo Producto
+        <p style="color: var(--text-muted); margin-bottom: 1.5rem;">Explora las demás opciones de nuestro catálogo recomendado.</p>
+        <button class="btn btn-secondary btn-sm" onclick="filterProducts('todos')">
+          Ver Todos los Productos
         </button>
       </div>
     `;
@@ -167,12 +165,6 @@ function renderProducts() {
       <div class="product-media">
         <img src="${product.image}" alt="${escapeHtml(product.title)}" class="product-img" onerror="this.src='assets/images/shampoo.jpg'">
         <span class="product-category-tag">${getCategoryName(product.category)}</span>
-        ${product.isCustom ? '<span class="product-custom-badge"><i class="fa-solid fa-sparkles"></i> Nuevo</span>' : ''}
-        ${product.isCustom ? `
-          <button class="product-delete-btn" onclick="deleteProduct('${product.id}')" title="Eliminar este producto">
-            <i class="fa-regular fa-trash-can"></i>
-          </button>
-        ` : ''}
       </div>
 
       <div class="product-content">
@@ -185,11 +177,8 @@ function renderProducts() {
         <p class="product-desc">${escapeHtml(product.desc)}</p>
 
         <div class="product-footer">
-          ${CONFIG.showPrices && product.price 
-            ? `<div class="product-price">${formatMoney(product.price)}</div>`
-            : `<div class="product-inquiry-tag"><i class="fa-solid fa-leaf"></i> Consultar precio</div>`
-          }
-          <button class="product-btn-want" onclick="addToCart('${product.id}')">
+          <div class="product-price">${formatMoney(product.price)}</div>
+          <button class="product-btn-want" onclick="addToCart('${product.id}')" aria-label="Añadir ${escapeHtml(product.title)} a tu bolsa">
             <i class="fa-solid fa-bag-shopping"></i>
             <span>¡Lo quiero!</span>
           </button>
@@ -229,134 +218,15 @@ function getCategoryName(cat) {
   const map = {
     shampoos: 'Shampoo',
     tratamientos: 'Tratamiento',
-    activadores: 'Activador',
-    accesorios: 'Accesorio'
+    aceites: 'Aceite',
+    cremas: 'Crema de Peinar'
   };
   return map[cat] || cat;
 }
 
-// ==========================================================================
-// ADD NEW PRODUCT (GESTIÓN DE PRODUCTOS)
-// ==========================================================================
-let uploadedImageBase64 = null;
-
-function openAddProductModal() {
-  const modal = document.getElementById('addProductModal');
-  if (modal) modal.classList.add('active');
-  resetProductForm();
-}
-
-function closeAddProductModal() {
-  const modal = document.getElementById('addProductModal');
-  if (modal) modal.classList.remove('active');
-}
-
-function resetProductForm() {
-  const form = document.getElementById('addProductForm');
-  if (form) form.reset();
-  uploadedImageBase64 = null;
-  updateImagePreview('');
-}
-
-function handleImageFileUpload(e) {
-  const file = e.target.files[0];
-  if (!file) return;
-
-  if (!file.type.startsWith('image/')) {
-    showToast('Por favor selecciona un archivo de imagen válido');
-    return;
-  }
-
-  const reader = new FileReader();
-  reader.onload = function(event) {
-    uploadedImageBase64 = event.target.result;
-    document.getElementById('prodImageUrl').value = '';
-    updateImagePreview(uploadedImageBase64);
-  };
-  reader.readAsDataURL(file);
-}
-
-function updateImagePreview(src) {
-  const previewImg = document.getElementById('previewImgElement');
-  const icon = document.getElementById('previewPlaceholderIcon');
-  const text = document.getElementById('previewPlaceholderText');
-
-  if (src && src.trim() !== '') {
-    previewImg.src = src;
-    previewImg.style.display = 'block';
-    if (icon) icon.style.display = 'none';
-    if (text) text.style.display = 'none';
-  } else {
-    previewImg.style.display = 'none';
-    if (icon) icon.style.display = 'block';
-    if (text) text.style.display = 'block';
-  }
-}
-
-function usePresetSampleImage() {
-  const samples = [
-    'assets/images/shampoo.jpg',
-    'assets/images/mascarilla.jpg',
-    'assets/images/serum.jpg'
-  ];
-  const randomSample = samples[Math.floor(Math.random() * samples.length)];
-  uploadedImageBase64 = randomSample;
-  document.getElementById('prodImageUrl').value = randomSample;
-  updateImagePreview(randomSample);
-  showToast('Muestra botánica seleccionada');
-}
-
-function handleCreateProduct(e) {
-  e.preventDefault();
-
-  const title = document.getElementById('prodTitle').value.trim();
-  const category = document.getElementById('prodCategory').value;
-  const rawPrice = document.getElementById('prodPrice').value;
-  const price = rawPrice ? parseFloat(rawPrice) : 0;
-  const botanical = document.getElementById('prodBotanical').value.trim();
-  const desc = document.getElementById('prodDesc').value.trim();
-  const urlInput = document.getElementById('prodImageUrl').value.trim();
-
-  let finalImage = uploadedImageBase64 || urlInput;
-  if (!finalImage) {
-    finalImage = 'assets/images/shampoo.jpg';
-  }
-
-  const newProduct = {
-    id: "custom-" + Date.now(),
-    title,
-    category,
-    price,
-    botanical,
-    desc,
-    image: finalImage,
-    isCustom: true
-  };
-
-  products.unshift(newProduct);
-  saveProducts();
-  renderProducts();
-  closeAddProductModal();
-
-  showToast(`¡"${title}" ha sido publicado en la botica!`);
-
-  const el = document.getElementById(`card-${newProduct.id}`);
-  if (el) {
-    el.scrollIntoView({ behavior: 'smooth', block: 'center' });
-  }
-}
-
-function deleteProduct(id) {
-  if (confirm('¿Estás seguro de que deseas eliminar este producto de la botica?')) {
-    products = products.filter(p => p.id !== id);
-    cart = cart.filter(item => item.id !== id);
-    saveProducts();
-    saveCart();
-    renderProducts();
-    renderCart();
-    showToast('Producto eliminado');
-  }
-}
+// Modal helper placeholders (Gestión directa en código por solicitud del usuario)
+function openAddProductModal() {}
+function closeAddProductModal() {}
 
 // ==========================================================================
 // CART & "¡LO QUIERO!" BEHAVIOR
@@ -418,20 +288,26 @@ function clearCart() {
 function renderCart() {
   const container = document.getElementById('cartItemsList');
   const countLabel = document.getElementById('cartItemCountLabel');
+  const totalPriceLabel = document.getElementById('cartTotalPriceLabel');
   if (!container) return;
 
   const totalItems = cart.reduce((sum, item) => sum + item.qty, 0);
+  const totalPrice = cart.reduce((sum, item) => sum + ((item.price || 0) * item.qty), 0);
+
   if (countLabel) {
     countLabel.textContent = `${totalItems} producto${totalItems === 1 ? '' : 's'}`;
+  }
+  if (totalPriceLabel) {
+    totalPriceLabel.textContent = formatMoney(totalPrice);
   }
 
   if (cart.length === 0) {
     container.innerHTML = `
       <div style="text-align: center; padding: 3rem 1rem; color: var(--text-muted);">
         <i class="fa-solid fa-leaf" style="font-size: 3rem; color: var(--border-medium); margin-bottom: 1rem;"></i>
-        <h4 style="font-family: var(--font-serif); font-size: 1.25rem; color: var(--text-main); margin-bottom: 0.5rem;">Tu lista está vacía</h4>
-        <p style="font-size: 0.88rem; margin-bottom: 1.5rem;">Explora los shampoos y tratamientos de la botica y pulsa "¡Lo quiero!" para añadirlos.</p>
-        <button class="btn btn-secondary btn-sm" onclick="closeCartDrawer()">Explorar Botica</button>
+        <h4 style="font-family: var(--font-serif); font-size: 1.25rem; color: var(--text-main); margin-bottom: 0.5rem;">Tu bolsa está vacía</h4>
+        <p style="font-size: 0.88rem; margin-bottom: 1.5rem;">Explora nuestro catálogo de productos recomendados y pulsa "¡Lo quiero!" para añadirlos a tu pedido.</p>
+        <button class="btn btn-secondary btn-sm" onclick="closeCartDrawer()">Explorar Catálogo</button>
       </div>
     `;
     return;
@@ -442,10 +318,7 @@ function renderCart() {
       <img src="${item.image}" alt="${escapeHtml(item.title)}" class="cart-item-img" onerror="this.src='assets/images/shampoo.jpg'">
       <div class="cart-item-details">
         <h4>${escapeHtml(item.title)}</h4>
-        ${CONFIG.showPrices && item.price
-          ? `<div class="cart-item-price">${formatMoney(item.price)}</div>`
-          : `<span class="cart-item-inquiry">Consultar valor</span>`
-        }
+        <div class="cart-item-price">${formatMoney(item.price)}</div>
         <div class="cart-item-qty">
           <button class="qty-btn" onclick="updateCartQty('${item.id}', -1)" aria-label="Disminuir">-</button>
           <span class="qty-num">${item.qty}</span>
@@ -494,17 +367,24 @@ function triggerBadgeBump() {
 
 function checkoutViaWhatsApp() {
   if (cart.length === 0) {
-    showToast('Tu lista está vacía. Selecciona un producto primero.');
+    showToast('Tu bolsa está vacía. Selecciona un producto primero.');
     return;
   }
 
-  let message = "¡Hola (Ancestral Curly - Academia)! 🌿 Deseo consultar la disponibilidad, precios y modo de uso de los siguientes productos de su botica:\n\n";
+  let total = 0;
+  let message = "¡Hola (Ancestral Curly - Academia)! 🌿 Deseo solicitar los siguientes productos de su catálogo:\n\n";
 
   cart.forEach((item, index) => {
-    message += `${index + 1}. *${item.title}* (Cantidad: ${item.qty})\n`;
+    const itemTotal = (item.price || 0) * item.qty;
+    total += itemTotal;
+    message += `${index + 1}. *${item.title}*\n   • Cantidad: ${item.qty} | Valor: ${formatMoney(item.price)}\n`;
   });
 
-  message += `\n¿Me podrían indicar los valores y si tienen envíos a mi ubicación? Muchas gracias.`;
+  if (total > 0) {
+    message += `\n💰 *Total Estimado:* ${formatMoney(total)}\n`;
+  }
+
+  message += `\n¿Me podrían confirmar disponibilidad y coordinar la entrega o envío? ¡Muchas gracias!`;
 
   const baseUrl = CONFIG.whatsappNumber 
     ? `https://wa.me/${CONFIG.whatsappNumber}?text=`
