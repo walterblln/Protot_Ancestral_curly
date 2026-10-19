@@ -1,0 +1,1005 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>(Ancestral Curly - Academia) | Asesorías Especializadas & Botica Natural</title>
+  <meta name="description" content="Centro de asesoría especializada en cabello ondulado, rizado y afro. Punto físico en Ciénaga (Magdalena) y atención virtual nacional. Diagnóstico capilar, talleres y productos certificados.">
+  <link rel="stylesheet" href="styles.css?v=2.4">
+  <!-- FontAwesome Icons for crisp UI icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+
+  <!-- ==========================================================================
+       NAVBAR
+       ========================================================================== -->
+  <header class="navbar" id="mainNavbar">
+    <div class="nav-container">
+      <a href="#inicio" class="brand-logo" id="brandLogo">
+        <div class="brand-icon">
+          <i class="fa-solid fa-seedling"></i>
+        </div>
+        <div class="brand-text">
+          <span class="brand-title">(Ancestral Curly - Academia)</span>
+          <span class="brand-subtitle">Cuidado Consciente de Ondas, Rizos & Afro</span>
+        </div>
+      </a>
+
+      <nav>
+        <ul class="nav-menu" id="navMenu">
+          <li><a href="#inicio" class="nav-link active">Inicio</a></li>
+          <li><a href="#transicion" class="nav-link">Transición</a></li>
+          <li><a href="#diagnostico" class="nav-link">Diagnóstico</a></li>
+          <li><a href="#botica" class="nav-link">Botica Natural</a></li>
+          <li><a href="#tecnicas" class="nav-link">Secretos del Rizo</a></li>
+          <li><a href="#testimonios" class="nav-link">Testimonios</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <button class="cart-btn" id="openCartBtn" aria-label="Ver bolsa de interés">
+          <i class="fa-solid fa-leaf"></i>
+          <span class="cart-count" id="cartBadge">0</span>
+        </button>
+
+        <a href="#asesorias" class="btn btn-primary btn-sm" id="navCtaBtn">
+          <i class="fa-regular fa-calendar-check"></i>
+          <span>Agendar Asesoría</span>
+        </a>
+
+        <button class="mobile-toggle" id="mobileMenuBtn" aria-label="Abrir menú" aria-expanded="false">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+  <div class="mobile-nav-backdrop" id="mobileNavBackdrop"></div>
+
+  <!-- ==========================================================================
+       HERO SECTION
+       ========================================================================== -->
+  <section class="hero" id="inicio">
+    <div class="container hero-grid">
+      <div class="hero-content">
+        <div class="hero-tag">
+          <span class="badge-pill badge-green">
+            <i class="fa-solid fa-seedling"></i> Ondulado • Rizado • Afro (2A a 4C)
+          </span>
+          <span class="badge-pill badge-magdalena">
+            <i class="fa-solid fa-location-dot"></i> Ciénaga (Magdalena) & Virtual Nacional
+          </span>
+        </div>
+
+        <h1 class="hero-title">
+          Recupera la salud de tus <span>ondas y rizos naturales</span> con conocimiento y confianza
+        </h1>
+
+        <p class="hero-subtitle">
+          En <strong>(Ancestral Curly - Academia)</strong> combinamos un punto físico en <strong>Ciénaga, Magdalena</strong> con atención virtual para toda Colombia. Acompañamos tu transición capilar con diagnóstico personalizado, talleres prácticos y productos certificados libres de químicos agresivos, adaptados al clima cálido de nuestra región.
+        </p>
+
+        <div class="hero-cta">
+          <button class="btn btn-primary" id="heroBookBtn" onclick="openBookingModal('Asesoría VIP 1 a 1')">
+            <i class="fa-solid fa-calendar-days"></i>
+            <span>Consultar y Agendar Asesoría</span>
+          </button>
+          <a href="#botica" class="btn btn-secondary" id="heroShopBtn">
+            <i class="fa-solid fa-mortar-pestle"></i>
+            <span>Explorar Botica Natural</span>
+          </a>
+        </div>
+
+        <div class="hero-features">
+          <div class="hero-feature-item">
+            <div class="hero-feature-icon">
+              <i class="fa-solid fa-store"></i>
+            </div>
+            <div class="hero-feature-text">
+              <strong>Punto en Ciénaga (Magdalena)</strong>
+              <span>Laboratorio creativo y talleres presenciales</span>
+            </div>
+          </div>
+
+          <div class="hero-feature-item">
+            <div class="hero-feature-icon">
+              <i class="fa-solid fa-laptop"></i>
+            </div>
+            <div class="hero-feature-text">
+              <strong>Atención Virtual Nacional</strong>
+              <span>Asesoría 1 a 1 desde cualquier municipio</span>
+            </div>
+          </div>
+
+          <div class="hero-feature-item">
+            <div class="hero-feature-icon">
+              <i class="fa-solid fa-shield-halved"></i>
+            </div>
+            <div class="hero-feature-text">
+              <strong>Transición Consciente</strong>
+              <span>Adiós a los alisados químicos y al formol</span>
+            </div>
+          </div>
+
+          <div class="hero-feature-item">
+            <div class="hero-feature-icon">
+              <i class="fa-solid fa-graduation-cap"></i>
+            </div>
+            <div class="hero-feature-text">
+              <strong>Educación & Confianza</strong>
+              <span>No vendemos solo envases, te enseñamos a cuidar tu hebra</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-visual">
+        <div class="hero-image-wrapper">
+          <img src="assets/images/hero.jpg" alt="Melenas onduladas y rizadas con volumen y definición natural" class="hero-img" id="heroImg">
+        </div>
+        <div class="hero-badge-floating">
+          <div class="hero-badge-icon">
+            <i class="fa-solid fa-heart-pulse"></i>
+          </div>
+          <div>
+            <div class="hero-badge-title">Melenas Satisfechas</div>
+            <div class="hero-badge-desc">Acompañamos a mujeres y familias a reconectar con su textura natural</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       TRANSICIÓN CAPILAR CONSCIENTE (PROPUESTA DE VALOR DEL PLAN DE NEGOCIO)
+       ========================================================================== -->
+  <section class="transicion-section" id="transicion">
+    <div class="container">
+      <div class="transicion-box">
+        <div class="section-header" style="margin-bottom: 1.5rem;">
+          <span class="badge-pill badge-terracotta section-tag">
+            <i class="fa-solid fa-rotate"></i> Nuestra Causa & Propuesta de Valor
+          </span>
+          <h2 class="section-title">¿Por qué nace <em>(Ancestral Curly - Academia)</em>?</h2>
+          <p class="section-description">
+            Durante años se ha normalizado la creencia de que "liso es estar arreglada", atrapando a miles de mujeres en procesos químicos costosos que dañan la fibra capilar y la salud. Nosotros ofrecemos la alternativa real y saludable.
+          </p>
+        </div>
+
+        <div class="transicion-grid">
+          <!-- Columna Problema Tradicional -->
+          <div class="transicion-card problem">
+            <div class="transicion-card-header">
+              <i class="fa-solid fa-triangle-exclamation"></i>
+              <h3>El Ciclo Tradicional de Alisados</h3>
+            </div>
+            <ul class="transicion-list">
+              <li>
+                <i class="fa-solid fa-xmark"></i>
+                <span><strong>Dependencia y Gasto Recurrente:</strong> Alisados con formol o queratinas cada 60 días con costos acumulados de hasta $1.500.000 al año.</span>
+              </li>
+              <li>
+                <i class="fa-solid fa-xmark"></i>
+                <span><strong>Impacto en la Salud y la Fibra:</strong> Vapores nocivos, resequedad extrema, pérdida de elasticidad y daño irreversible en la cutícula capilar.</span>
+              </li>
+              <li>
+                <i class="fa-solid fa-xmark"></i>
+                <span><strong>Productos Comprados a Ciegas:</strong> Comprar en tiendas y supermercados sin saber qué necesita la hebra, acumulando productos que no funcionan.</span>
+              </li>
+              <li>
+                <i class="fa-solid fa-xmark"></i>
+                <span><strong>Frustración al Peinarse:</strong> Dificultad para controlar el frizz bajo el clima cálido y húmedo de nuestra región.</span>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Columna Solución Ancestral Curly -->
+          <div class="transicion-card solution">
+            <div class="transicion-card-header">
+              <i class="fa-solid fa-seedling"></i>
+              <h3>La Solución Ancestral Curly</h3>
+            </div>
+            <ul class="transicion-list">
+              <li>
+                <i class="fa-solid fa-check"></i>
+                <span><strong>Diagnóstico Previo Personalizado:</strong> Evaluamos tu porosidad y elasticidad antes de recomendarte cualquier rutina para que no malgastes tu dinero.</span>
+              </li>
+              <li>
+                <i class="fa-solid fa-check"></i>
+                <span><strong>Fórmulas Adaptadas al Caribe:</strong> Productos certificados libres de químicos agresivos que controlan el frizz sin apelmazar en clima cálido.</span>
+              </li>
+              <li>
+                <i class="fa-solid fa-check"></i>
+                <span><strong>Educación Continua:</strong> Talleres prácticos paso a paso para que aprendas a definir tus ondas, rizos o afros de forma autónoma.</span>
+              </li>
+              <li>
+                <i class="fa-solid fa-check"></i>
+                <span><strong>Enfoque Familiar:</strong> Orientación especial para madres y padres que cuidan el cabello de niñas y adolescentes con amor y orgullo.</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       DIAGNÓSTICO INTERACTIVO DE POROSIDAD Y PATRÓN (CARMEL & CORI)
+       ========================================================================== -->
+  <section class="quiz-section" id="diagnostico">
+    <div class="container">
+      <div class="section-header">
+        <span class="badge-pill badge-green section-tag">
+          <i class="fa-solid fa-wand-magic-sparkles"></i> Test Interactivo
+        </span>
+        <h2 class="section-title">Diagnóstico Preliminar de <em>Porosidad & Patrón</em></h2>
+        <p class="section-description">
+          Aplica el método de la Academia para descubrir cómo reacciona tu cutícula capilar y qué tipo de cuidado necesita tu melena en el clima caribeño.
+        </p>
+      </div>
+
+      <div class="quiz-card" id="quizCard">
+        <!-- Steps Navigation -->
+        <div class="quiz-steps-nav">
+          <div class="quiz-step-indicator active" id="stepIndicator1">
+            <span class="step-number">1</span>
+            <span class="step-label">Patrón de Curvatura</span>
+          </div>
+          <div class="quiz-step-indicator" id="stepIndicator2">
+            <span class="step-number">2</span>
+            <span class="step-label">Porosidad (Dinámica Cuticular)</span>
+          </div>
+          <div class="quiz-step-indicator" id="stepIndicator3">
+            <span class="step-number">3</span>
+            <span class="step-label">Principal Reto</span>
+          </div>
+        </div>
+
+        <!-- Step 1 Content -->
+        <div class="quiz-step-content active" id="quizStep1">
+          <h3 class="quiz-question-title">¿Cuál es la textura o patrón natural de tu cabello?</h3>
+          <p class="quiz-question-hint">Selecciona la opción que mejor describe tu hebra capilar:</p>
+          <div class="quiz-options-grid">
+            <div class="quiz-option-card" onclick="selectQuizOption(1, 'ondulado', this)">
+              <div class="quiz-option-icon">🌊</div>
+              <div class="quiz-option-title">Cabello Ondulado (2A, 2B, 2C)</div>
+              <div class="quiz-option-desc">Curvas suaves en forma de 'S'. Requiere texturas ingrávidas para no perder el volumen en la raíz ni apelmazarse.</div>
+            </div>
+            <div class="quiz-option-card" onclick="selectQuizOption(1, 'rizado', this)">
+              <div class="quiz-option-icon">🌀</div>
+              <div class="quiz-option-title">Cabello Rizado (3A, 3B, 3C)</div>
+              <div class="quiz-option-desc">Bucles en espiral elásticos y bien definidos. Necesita balance de hidratación y técnicas de sellado contra el frizz.</div>
+            </div>
+            <div class="quiz-option-card" onclick="selectQuizOption(1, 'afro', this)">
+              <div class="quiz-option-icon">✨</div>
+              <div class="quiz-option-title">Cabello Afro / Crespo (4A, 4B, 4C)</div>
+              <div class="quiz-option-desc">Espirales densas en zigzag o patrón muy cerrado. Demanda nutrición profunda, mantecas nobles y máxima retención de humedad.</div>
+            </div>
+          </div>
+          <div class="quiz-actions" style="justify-content: flex-end;">
+            <button class="btn btn-primary" onclick="nextQuizStep(2)" id="btnStep1Next" disabled>
+              <span>Continuar</span>
+              <i class="fa-solid fa-arrow-right"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Step 2 Content (Pedagogía Carmel y Cori) -->
+        <div class="quiz-step-content" id="quizStep2">
+          <h3 class="quiz-question-title">¿Cómo responde tu cutícula al agua y a los tratamientos?</h3>
+          <p class="quiz-question-hint">Comportamiento de absorción capilar según nuestra dinámica pedagógica:</p>
+          <div class="quiz-options-grid">
+            <div class="quiz-option-card" onclick="selectQuizOption(2, 'baja', this)">
+              <div class="quiz-option-icon">💧</div>
+              <div class="quiz-option-title">Porosidad Baja (Estilo CORI)</div>
+              <div class="quiz-option-desc">Cutículas muy compactadas y selladas. El agua resbala, tarda horas en secar y las cremas pesadas se quedan sobre la superficie.</div>
+            </div>
+            <div class="quiz-option-card" onclick="selectQuizOption(2, 'media', this)">
+              <div class="quiz-option-icon">⚖️</div>
+              <div class="quiz-option-title">Porosidad Media (Equilibrada)</div>
+              <div class="quiz-option-desc">Cutícula sana y flexible. Absorbe fácilmente la hidratación y la retiene con brillo natural bajo una rutina básica.</div>
+            </div>
+            <div class="quiz-option-card" onclick="selectQuizOption(2, 'alta', this)">
+              <div class="quiz-option-icon">🌵</div>
+              <div class="quiz-option-title">Porosidad Alta (Estilo CARMEL)</div>
+              <div class="quiz-option-desc">Cutícula abierta por alisados, calor, tintes o sol caribeño. Absorbe el agua al instante pero la pierde enseguida, generando frizz.</div>
+            </div>
+          </div>
+          <div class="quiz-actions">
+            <button class="btn btn-secondary" onclick="prevQuizStep(1)">
+              <i class="fa-solid fa-arrow-left"></i>
+              <span>Atrás</span>
+            </button>
+            <button class="btn btn-primary" onclick="nextQuizStep(3)" id="btnStep2Next" disabled>
+              <span>Continuar</span>
+              <i class="fa-solid fa-arrow-right"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Step 3 Content -->
+        <div class="quiz-step-content" id="quizStep3">
+          <h3 class="quiz-question-title">¿Cuál es tu mayor motivación o necesidad actual?</h3>
+          <p class="quiz-question-hint">Queremos brindarte la orientación más acertada:</p>
+          <div class="quiz-options-grid">
+            <div class="quiz-option-card" onclick="selectQuizOption(3, 'transicion', this)">
+              <div class="quiz-option-icon">🌱</div>
+              <div class="quiz-option-title">Transición Capilar</div>
+              <div class="quiz-option-desc">Quiero dejar los alisados químicos, planchas o queratinas y recuperar mi textura natural con acompañamiento experto.</div>
+            </div>
+            <div class="quiz-option-card" onclick="selectQuizOption(3, 'frizz-caribe', this)">
+              <div class="quiz-option-icon">☀️</div>
+              <div class="quiz-option-title">Frizz por Clima Cálido</div>
+              <div class="quiz-option-desc">Vivo en el Magdalena o región Caribe y la humedad desarma mis rizos y esponja mi cabello en cuanto salgo a la calle.</div>
+            </div>
+            <div class="quiz-option-card" onclick="selectQuizOption(3, 'familia', this)">
+              <div class="quiz-option-icon">👧</div>
+              <div class="quiz-option-title">Cuidado Infantil / Familiar</div>
+              <div class="quiz-option-desc">Soy madre, padre o cuidador y deseo aprender a manejar, desenredar y estilizar los rizos de mi hija sin dolor ni químicos.</div>
+            </div>
+          </div>
+          <div class="quiz-actions">
+            <button class="btn btn-secondary" onclick="prevQuizStep(2)">
+              <i class="fa-solid fa-arrow-left"></i>
+              <span>Atrás</span>
+            </button>
+            <button class="btn btn-primary" onclick="calculateQuizResult()" id="btnStep3Next" disabled>
+              <i class="fa-solid fa-wand-magic-sparkles"></i>
+              <span>Ver Mi Diagnóstico</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Result Box -->
+        <div class="quiz-step-content" id="quizResultView">
+          <div class="quiz-result-box">
+            <span class="quiz-result-tag">Diagnóstico de la Academia</span>
+            <h3 class="quiz-result-title" id="resultTitle">Perfil Capilar Personalizado</h3>
+            <p class="quiz-result-summary" id="resultSummary">
+              Tu cabello tiene un potencial extraordinario. Con la rutina adecuada y técnicas botánicas sin peso, tus ondas y rizos lucirán saludables, brillantes y resistentes a la humedad.
+            </p>
+
+            <div class="quiz-result-details">
+              <div class="result-detail-item">
+                <h4>Metodología Recomendada</h4>
+                <p id="resTech">Técnica rizo a rizo con hidratación botánica profunda</p>
+              </div>
+              <div class="result-detail-item">
+                <h4>Fórmula Botánica Sugerida</h4>
+                <p id="resFormula">Extractos de Romero, Linaza pura y Manteca de Murumuru</p>
+              </div>
+              <div class="result-detail-item">
+                <h4>Paso Sugerido</h4>
+                <p id="resStep">Asesoría personalizada (Presencial en Ciénaga o Virtual)</p>
+              </div>
+            </div>
+
+            <div style="display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; margin-top: 1rem;">
+              <button class="btn btn-primary" onclick="openBookingModal('Asesoría con Diagnóstico Personalizado')">
+                <i class="fa-regular fa-calendar-check"></i>
+                <span>Consultar Asesoría para Mi Caso</span>
+              </button>
+              <button class="btn btn-secondary" onclick="restartQuiz()">
+                <i class="fa-solid fa-rotate-right"></i>
+                <span>Repetir Diagnóstico</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       ASESORÍAS PERSONALIZADAS (SECCIÓN PRINCIPAL)
+       ========================================================================== -->
+  <section class="asesorias-section" id="asesorias">
+    <div class="container">
+      <div class="section-header">
+        <span class="badge-pill badge-green section-tag">
+          <i class="fa-solid fa-gem"></i> Nuestro Enfoque Principal
+        </span>
+        <h2 class="section-title">Asesorías Personalizadas & <em>Talleres Prácticos</em></h2>
+        <p class="section-description">
+          Aprende exactamente qué necesita tu hebra con sesiones 1 a 1. Diseñamos tu cronograma capilar, te acompañamos en tu transición y te enseñamos a dominar tus ondas, rizos o afros.
+        </p>
+      </div>
+
+      <!-- Feature Highlight Showcase -->
+      <div class="asesorias-showcase">
+        <div class="showcase-media">
+          <img src="assets/images/asesoria.jpg" alt="Especialista realizando diagnóstico capilar en el estudio botánico" class="showcase-img">
+          <div class="showcase-badge">
+            <i class="fa-solid fa-location-dot" style="color: #79d29b;"></i> Punto Físico en Ciénaga & Virtual Nacional
+          </div>
+        </div>
+
+        <div class="showcase-info">
+          <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+            <span class="badge-pill badge-green">Laboratorio Creativo</span>
+            <span class="badge-pill badge-magdalena"><i class="fa-solid fa-map-pin"></i> Ciénaga, Magdalena</span>
+          </div>
+          <h3 class="showcase-title">Un modelo de valor centrado en ti, no en el producto</h3>
+          <p class="showcase-desc">
+            A diferencia de las tiendas que solo revenden frascos al paso o las peluquerías que imponen alisados, en <strong>(Ancestral Curly - Academia)</strong> te entregamos el conocimiento para que seas dueña de tu rutina.
+          </p>
+          <ul class="showcase-points">
+            <li>
+              <i class="fa-solid fa-check"></i>
+              <span><strong>Diagnóstico de Porosidad y Elasticidad:</strong> Evaluación macro de tu hebra para evitar que compres productos inadecuados.</span>
+            </li>
+            <li>
+              <i class="fa-solid fa-check"></i>
+              <span><strong>Acompañamiento en Transición Capilar:</strong> Guía paso a paso para recuperar tu patrón natural tras años de calor o alisados con formol.</span>
+            </li>
+            <li>
+              <i class="fa-solid fa-check"></i>
+              <span><strong>Técnicas Adaptadas al Clima Cálido:</strong> Dominio de *Scrunch*, *Plopping*, geles botánicos y sellado contra la humedad del Caribe.</span>
+            </li>
+            <li>
+              <i class="fa-solid fa-check"></i>
+              <span><strong>Comunidad & Confianza:</strong> Seguimiento cercano vía WhatsApp para resolver dudas en tu día a día.</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Service Tiers / Planes (Adaptados a los 3 perfiles del PDF) -->
+      <div class="tiers-grid">
+        <!-- Tier 1 -->
+        <div class="tier-card" id="tierCard1" data-tier="transicion" data-future-price="65000">
+          <div class="tier-header">
+            <h3 class="tier-name">Diagnóstico & Transición</h3>
+            <p class="tier-tagline">Ideal para mujeres y jóvenes que desean evaluar su patrón, salir del alisado y armar su primer cronograma capilar.</p>
+          </div>
+          
+          <div class="tier-inquiry-box">
+            <span class="tier-inquiry-title"><i class="fa-solid fa-leaf"></i> Modalidad 100% Virtual</span>
+            <span class="tier-inquiry-sub">Disponible para todo el Magdalena y Colombia</span>
+          </div>
+
+          <ul class="tier-features-list">
+            <li class="highlight">
+              <i class="fa-solid fa-check"></i>
+              <span>Evaluación fotográfica de tu hebra seca y mojada</span>
+            </li>
+            <li>
+              <i class="fa-solid fa-check"></i>
+              <span>Identificación de patrón (Ondas 2A-2C, Rizos 3A-3C, Afro 4A-4C)</span>
+            </li>
+            <li>
+              <i class="fa-solid fa-check"></i>
+              <span>Test de porosidad y nivel de elasticidad capilar</span>
+            </li>
+            <li>
+              <i class="fa-solid fa-check"></i>
+              <span>Guía digital con cronograma capilar de 4 semanas</span>
+            </li>
+            <li>
+              <i class="fa-solid fa-check"></i>
+              <span>Lista de ingredientes aptos y recomendados</span>
+            </li>
+          </ul>
+          <button class="btn btn-secondary tier-btn" onclick="openBookingModal('Diagnóstico & Plan de Transición')">
+            <span>Consultar y Agendar</span>
+            <i class="fa-solid fa-arrow-right"></i>
+          </button>
+        </div>
+
+        <!-- Tier 2 (Featured) -->
+        <div class="tier-card featured" id="tierCard2" data-tier="vip" data-future-price="120000">
+          <div class="tier-badge">Más Elegida</div>
+          <div class="tier-header">
+            <h3 class="tier-name">Asesoría VIP 1 a 1 & Taller</h3>
+            <p class="tier-tagline">Sesión interactiva en vivo con práctica de técnicas de definición, auditoría de productos y acompañamiento personalizado.</p>
+          </div>
+
+          <div class="tier-inquiry-box">
+            <span class="tier-inquiry-title"><i class="fa-solid fa-star"></i> Presencial o Virtual</span>
+            <span class="tier-inquiry-sub">Punto físico en Ciénaga (Magdalena) o Google Meet</span>
+          </div>
+
+          <ul class="tier-features-list">
+            <li class="highlight">
+              <i class="fa-solid fa-check"></i>
+              <span><strong>Sesión 1 a 1 interactiva</strong> (Presencial en Ciénaga o Virtual)</span>
+            </li>
+            <li class="highlight">
+              <i class="fa-solid fa-check"></i>
+              <span>Auditoría de todos los productos que tienes en casa</span>
+            </li>
+            <li>
+              <i class="fa-solid fa-check"></i>
+              <span>Taller práctico de definición de rizos y control de frizz en clima cálido</span>
+            </li>
+            <li>
+              <i class="fa-solid fa-check"></i>
+              <span>Diseño de rutina de lavado, nutrición y estilizado</span>
+            </li>
+            <li class="highlight">
+              <i class="fa-solid fa-check"></i>
+              <span><strong>Seguimiento directo vía WhatsApp por 30 días</strong></span>
+            </li>
+          </ul>
+          <button class="btn btn-primary tier-btn" onclick="openBookingModal('Asesoría VIP 1 a 1 & Taller')">
+            <i class="fa-regular fa-calendar-check"></i>
+            <span>Consultar y Reservar VIP</span>
+          </button>
+        </div>
+
+        <!-- Tier 3 (Familiar / Madres Cuidadoras) -->
+        <div class="tier-card" id="tierCard3" data-tier="familiar" data-future-price="150000">
+          <div class="tier-header">
+            <h3 class="tier-name">Asesoría Familiar & Niñas</h3>
+            <p class="tier-tagline">Diseñada para madres, padres y acudientes que desean aprender a cuidar las ondas y rizos de niñas y adolescentes.</p>
+          </div>
+
+          <div class="tier-inquiry-box">
+            <span class="tier-inquiry-title"><i class="fa-solid fa-hands-holding-child"></i> Enfoque Familiar</span>
+            <span class="tier-inquiry-sub">Presencial en Ciénaga o Virtual con la menor</span>
+          </div>
+
+          <ul class="tier-features-list">
+            <li class="highlight">
+              <i class="fa-solid fa-check"></i>
+              <span><strong>Técnicas de desenredo suave y sin dolor</strong> para niñas</span>
+            </li>
+            <li>
+              <i class="fa-solid fa-check"></i>
+              <span>Selección de fórmulas botánicas suaves sin químicos agresivos</span>
+            </li>
+            <li class="highlight">
+              <i class="fa-solid fa-check"></i>
+              <span>Peinados escolares protectores y mantenimiento nocturno</span>
+            </li>
+            <li>
+              <i class="fa-solid fa-check"></i>
+              <span>Educación en autoestima y orgullo por el cabello natural</span>
+            </li>
+            <li>
+              <i class="fa-solid fa-check"></i>
+              <span>Acompañamiento a la madre/cuidadora en la rutina</span>
+            </li>
+          </ul>
+          <button class="btn btn-secondary tier-btn" onclick="openBookingModal('Asesoría Familiar & Cuidadoras')">
+            <span>Consultar Asesoría Familiar</span>
+            <i class="fa-solid fa-arrow-right"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       BOTICA DE PRODUCTOS NATURALES (VENTA Y GESTIÓN)
+       ========================================================================== -->
+  <section class="products-section" id="botica">
+    <div class="container">
+      <div class="section-header">
+        <span class="badge-pill badge-green section-tag">
+          <i class="fa-solid fa-mortar-pestle"></i> Botica Ancestral Consciente
+        </span>
+        <h2 class="section-title">Productos Certificados para <em>Cuidado & Transición</em></h2>
+        <p class="section-description">
+          Fórmulas botánicas artesanales y distribución de marcas certificadas aptas (libres de sulfatos agresivos, siliconas insolubles y petrolatos). Adaptadas a las necesidades del clima caribeño.
+        </p>
+      </div>
+
+      <!-- Toolbar / Filters & Add Product Action -->
+      <div class="products-toolbar">
+        <div class="filter-tabs" id="filterTabs">
+          <button class="filter-tab active" data-category="todos" onclick="filterProducts('todos', this)">Todos</button>
+          <button class="filter-tab" data-category="shampoos" onclick="filterProducts('shampoos', this)">Shampoos</button>
+          <button class="filter-tab" data-category="tratamientos" onclick="filterProducts('tratamientos', this)">Tratamientos</button>
+          <button class="filter-tab" data-category="activadores" onclick="filterProducts('activadores', this)">Activadores & Sérums</button>
+          <button class="filter-tab" data-category="accesorios" onclick="filterProducts('accesorios', this)">Accesorios</button>
+        </div>
+
+        <div class="products-actions-bar">
+          <button class="add-product-btn" id="openAddProductModalBtn" onclick="openAddProductModal()">
+            <i class="fa-solid fa-plus"></i>
+            <span>Agregar Producto para la Venta</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Products Grid -->
+      <div class="products-grid" id="productsGrid">
+        <!-- Rendered dynamically by JavaScript -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       TÉCNICAS & SECRETOS DE LA ACADEMIA (ONDAS, RIZOS & CARIBE)
+       ========================================================================== -->
+  <section class="techniques-section" id="tecnicas">
+    <div class="container">
+      <div class="section-header">
+        <span class="badge-pill badge-green section-tag">
+          <i class="fa-solid fa-book-open"></i> Metodología de la Academia
+        </span>
+        <h2 class="section-title">El Arte de Cuidar <em>Ondas, Rizos y Afros</em></h2>
+        <p class="section-description">
+          Principios ancestrales y botánicos para proteger la cutícula del cabello frente al sol, el viento y la humedad del Caribe colombiano.
+        </p>
+      </div>
+
+      <div class="techniques-grid">
+        <div class="tech-card">
+          <div class="tech-icon-wrap">
+            <i class="fa-solid fa-hands-bubbles"></i>
+          </div>
+          <h3 class="tech-title">Técnica "Scrunch" Ingrávido</h3>
+          <p class="tech-desc">
+            Apretar las ondas y rizos desde las puntas hacia el cuero cabelludo mientras el cabello está empapado. Ayuda a que el agua y el producto formen grupos definidos ('curl clumps') sin apelmazar.
+          </p>
+          <div class="tech-tip">
+            <strong>Consejo Ancestral:</strong> Hazlo siempre con la cabeza inclinada para ganar volumen en la raíz.
+          </div>
+        </div>
+
+        <div class="tech-card">
+          <div class="tech-icon-wrap">
+            <i class="fa-solid fa-shirt"></i>
+          </div>
+          <h3 class="tech-title">Micro-Plopping con Bambú o Algodón</h3>
+          <p class="tech-desc">
+            Las toallas convencionales de rizo generan fricción que abre la cutícula y multiplica el frizz. Usar fibras suaves de algodón o bambú absorbe el exceso de agua sin robar los nutrientes.
+          </p>
+          <div class="tech-tip">
+            <strong>Consejo Ancestral:</strong> Máximo 10 a 15 minutos para que la onda o bucle no pierda su forma con el peso húmedo.
+          </div>
+        </div>
+
+        <div class="tech-card">
+          <div class="tech-icon-wrap">
+            <i class="fa-solid fa-bottle-droplet"></i>
+          </div>
+          <h3 class="tech-title">Romper la Capa Rígida (SOTC)</h3>
+          <p class="tech-desc">
+            Los geles naturales de linaza o chía crean una capa protectora ('cast') que mantiene el rizo blindado de la humedad exterior. Al estar 100% seco, unas gotas de sérum ligero rompen la dureza dejando suavidad total.
+          </p>
+          <div class="tech-tip">
+            <strong>Consejo Ancestral:</strong> Nunca rompas el cast si el cabello aún conserva algo de humedad.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       TESTIMONIOS REALES
+       ========================================================================== -->
+  <section class="testimonials-section" id="testimonios">
+    <div class="container">
+      <div class="section-header">
+        <span class="badge-pill badge-green section-tag">
+          <i class="fa-solid fa-heart"></i> Experiencias Reales
+        </span>
+        <h2 class="section-title">Resultados de mujeres <em>satisfechas con sus rizos</em></h2>
+        <p class="section-description">
+          Mujeres y familias del Magdalena y de todo el país que decidieron dejar atrás el alisado químico y reconectaron con su textura natural.
+        </p>
+      </div>
+
+      <div class="testimonials-grid">
+        <div class="testimonial-card">
+          <div class="testimonial-stars">
+            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+          </div>
+          <p class="testimonial-quote">
+            "Llevaba 6 años alisándome con queratina cada dos meses por miedo al frizz en Ciénaga. En la asesoría VIP aprendí a amar mis rizos 3B y a definirlos con productos limpios. ¡Siento que recuperé mi libertad!"
+          </p>
+          <div class="testimonial-author">
+            <div class="author-avatar">MC</div>
+            <div class="author-info">
+              <h4>Mariana C.</h4>
+              <span>Ciénaga, Magdalena • Asesoría VIP 1 a 1</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card">
+          <div class="testimonial-stars">
+            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+          </div>
+          <p class="testimonial-quote">
+            "Como mamá no sabía cómo peinar a mi hija de 9 años sin hacerla llorar. La asesoría familiar nos cambió la rutina por completo: ahora desenredamos con amor y sus rizos lucen preciosos en el colegio."
+          </p>
+          <div class="testimonial-author">
+            <div class="author-avatar">LP</div>
+            <div class="author-info">
+              <h4>Laura P. & Sofía</h4>
+              <span>Santa Marta • Asesoría Familiar</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card">
+          <div class="testimonial-stars">
+            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+          </div>
+          <p class="testimonial-quote">
+            "Hice el diagnóstico virtual desde Bogotá. El cronograma capilar paso a paso me dio la claridad que necesitaba. Mis ondas 2C tienen ahora brillo, movimiento y cero pesadez."
+          </p>
+          <div class="testimonial-author">
+            <div class="author-avatar">VG</div>
+            <div class="author-info">
+              <h4>Valeria G.</h4>
+              <span>Bogotá • Diagnóstico Virtual</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       FOOTER
+       ========================================================================== -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="brand-logo" style="margin-bottom: 0.5rem;">
+            <div class="brand-icon">
+              <i class="fa-solid fa-seedling"></i>
+            </div>
+            <div class="brand-text">
+              <span class="brand-title" style="color: #FFF;">(Ancestral Curly - Academia)</span>
+              <span class="brand-subtitle" style="color: #79d29b;">Conocimiento & Confianza</span>
+            </div>
+          </div>
+          <p>
+            Centro de asesoría especializada en cabello rizado, ondulado y afro. Acompañamos la transición capilar hacia una belleza consciente, rompiendo estigmas y fomentando la salud capilar (ODS 3).
+          </p>
+        </div>
+
+        <div class="footer-col">
+          <h4>Asesorías & Academia</h4>
+          <ul class="footer-links">
+            <li><a href="#transicion">Transición Capilar</a></li>
+            <li><a href="#diagnostico">Test de Porosidad</a></li>
+            <li><a href="#asesorias">Diagnóstico Virtual</a></li>
+            <li><a href="#asesorias">Asesoría VIP 1 a 1</a></li>
+            <li><a href="#asesorias">Asesoría Familiar</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Botica Certificada</h4>
+          <ul class="footer-links">
+            <li><a href="#botica" onclick="filterProducts('shampoos')">Shampoos Suaves</a></li>
+            <li><a href="#botica" onclick="filterProducts('tratamientos')">Mascarillas Nutritivas</a></li>
+            <li><a href="#botica" onclick="filterProducts('activadores')">Sérums & Activadores</a></li>
+            <li><a href="#botica" onclick="openAddProductModal()">Publicar un Producto</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Ubicación & Atención</h4>
+          <ul class="footer-links">
+            <li><i class="fa-solid fa-location-dot"></i> Punto Físico: Ciénaga (Magdalena)</li>
+            <li><i class="fa-solid fa-map-pin"></i> Cobertura: Santa Marta & Magdalena</li>
+            <li><i class="fa-solid fa-laptop"></i> Atención Virtual en toda Colombia</li>
+            <li><i class="fa-brands fa-whatsapp"></i> Atención Directa vía WhatsApp</li>
+            <li><i class="fa-solid fa-calendar-check"></i> Sesiones con cita coordinada</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>© (Ancestral Curly - Academia). Laboratorio Creativo & Formación Capilar.</div>
+        <div style="display: flex; gap: 1.5rem;">
+          <a href="#">Salud Capilar Consciente</a>
+          <a href="#">Términos del Servicio</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ==========================================================================
+       MODAL: AGREGAR PRODUCTO PARA LA VENTA
+       ========================================================================== -->
+  <div class="modal-overlay" id="addProductModal">
+    <div class="modal-container">
+      <div class="modal-header">
+        <div class="modal-title-wrap">
+          <h3>Agregar Producto para la Venta</h3>
+          <p>Publica un nuevo shampoo, tratamiento natural o producto certificado en la botica.</p>
+        </div>
+        <button class="modal-close-btn" onclick="closeAddProductModal()" aria-label="Cerrar modal">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <div class="modal-body">
+        <form id="addProductForm" onsubmit="handleCreateProduct(event)">
+          <div class="form-group">
+            <label class="form-label" for="prodTitle">Nombre del Producto *</label>
+            <input type="text" id="prodTitle" class="form-input" placeholder="Ej: Gel de Linaza y Aloe Vera Puro" required>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="prodCategory">Categoría *</label>
+              <select id="prodCategory" class="form-select" required>
+                <option value="shampoos">Shampoos</option>
+                <option value="tratamientos">Tratamientos & Mascarillas</option>
+                <option value="activadores">Activadores & Sérums</option>
+                <option value="accesorios">Accesorios</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="prodPrice">Precio Referencial (Opcional para el futuro)</label>
+              <input type="number" id="prodPrice" class="form-input" placeholder="Ej: 38000" min="0" step="500">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="prodBotanical">Ingrediente Activo / Certificación *</label>
+            <input type="text" id="prodBotanical" class="form-input" placeholder="Ej: Semillas de Linaza, Romero & Libre de Sulfatos" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="prodDesc">Pequeña Descripción del Producto *</label>
+            <textarea id="prodDesc" class="form-textarea" rows="3" placeholder="Describe los beneficios para ondas, rizos o afros, cómo aplicarlo y resultados..." required></textarea>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Imagen del Producto *</label>
+            <div style="display: flex; gap: 0.8rem; margin-bottom: 0.6rem;">
+              <input type="file" id="prodImageFile" accept="image/*" style="display: none;" onchange="handleImageFileUpload(event)">
+              <button type="button" class="btn btn-secondary btn-sm" onclick="document.getElementById('prodImageFile').click()">
+                <i class="fa-solid fa-upload"></i> Subir desde tu equipo
+              </button>
+              <button type="button" class="btn btn-secondary btn-sm" onclick="usePresetSampleImage()">
+                <i class="fa-solid fa-wand-magic-sparkles"></i> Usar muestra botánica
+              </button>
+            </div>
+            <input type="url" id="prodImageUrl" class="form-input" placeholder="O pega una URL de imagen (https://...)" oninput="updateImagePreview(this.value)">
+
+            <div class="image-preview-box" id="imagePreviewContainer" onclick="document.getElementById('prodImageFile').click()">
+              <i class="fa-regular fa-image" style="font-size: 2.2rem;" id="previewPlaceholderIcon"></i>
+              <span id="previewPlaceholderText">Haz clic para subir imagen o ingresa una URL</span>
+              <img src="" alt="Previsualización" id="previewImgElement" style="display: none;">
+            </div>
+          </div>
+
+          <div style="display: flex; gap: 1rem; margin-top: 1.5rem;">
+            <button type="button" class="btn btn-secondary" style="flex: 1;" onclick="closeAddProductModal()">Cancelar</button>
+            <button type="submit" class="btn btn-primary" style="flex: 2;">
+              <i class="fa-solid fa-plus"></i> Publicar en la Botica
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       MODAL: RESERVA DE ASESORÍA PERSONALIZADA
+       ========================================================================== -->
+  <div class="modal-overlay" id="bookingModal">
+    <div class="modal-container">
+      <div class="modal-header">
+        <div class="modal-title-wrap">
+          <h3 id="bookingModalTitle">Consultar y Agendar Asesoría</h3>
+          <p>Recibe orientación personalizada para ti o tu familia.</p>
+        </div>
+        <button class="modal-close-btn" onclick="closeBookingModal()" aria-label="Cerrar modal">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <div class="modal-body">
+        <form id="bookingForm" onsubmit="handleBookingSubmit(event)">
+          <div class="form-group">
+            <label class="form-label" for="bookPlan">Asesoría de Interés *</label>
+            <select id="bookPlan" class="form-select" required>
+              <option value="Diagnóstico & Plan de Transición (Virtual)">Diagnóstico & Plan de Transición (Virtual Nacional)</option>
+              <option value="Asesoría VIP 1 a 1 & Taller" selected>Asesoría VIP 1 a 1 & Taller de Definición</option>
+              <option value="Asesoría Familiar & Cuidadoras">Asesoría Familiar & Niñas/Adolescentes</option>
+            </select>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="bookName">Nombre y Apellido *</label>
+              <input type="text" id="bookName" class="form-input" placeholder="Tu nombre" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="bookModalidad">Modalidad de Asesoría *</label>
+              <select id="bookModalidad" class="form-select" required>
+                <option value="Virtual (Videollamada Google Meet)" selected>Virtual (Videollamada en vivo)</option>
+                <option value="Presencial en Ciénaga, Magdalena (Cita previa)">Presencial en Ciénaga, Magdalena (Cita previa)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="bookType">Tipo de Textura Capilar</label>
+              <select id="bookType" class="form-select">
+                <option value="Ondas (2A, 2B, 2C)">Ondas (2A, 2B, 2C)</option>
+                <option value="Rizos (3A, 3B, 3C)" selected>Rizos (3A, 3B, 3C)</option>
+                <option value="Afro / Crespo (4A, 4B, 4C)">Afro / Crespo (4A, 4B, 4C)</option>
+                <option value="En Transición Capilar (con alisado previo)">En Transición Capilar (con alisado previo)</option>
+                <option value="Cuidado Infantil (para mi hija)">Cuidado Infantil (para mi hija)</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="bookDate">Fecha Tentativa Preferida</label>
+              <input type="date" id="bookDate" class="form-input" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="bookNotes">Cuéntanos sobre tu cabello o inquietudes</label>
+            <textarea id="bookNotes" class="form-textarea" rows="2" placeholder="¿Vienes de alisados o queratinas? ¿Qué te gustaría aprender a dominar?"></textarea>
+          </div>
+
+          <div style="display: flex; gap: 1rem; margin-top: 1.5rem;">
+            <button type="button" class="btn btn-secondary" style="flex: 1;" onclick="closeBookingModal()">Cancelar</button>
+            <button type="submit" class="btn btn-primary" style="flex: 2;">
+              <i class="fa-brands fa-whatsapp"></i> Consultar por WhatsApp
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       CART / "¡LO QUIERO!" SLIDE DRAWER
+       ========================================================================== -->
+  <div class="cart-drawer-overlay" id="cartOverlay" onclick="closeCartDrawer()"></div>
+  <aside class="cart-drawer" id="cartDrawer" aria-label="Bolsa de productos de interés">
+    <div class="cart-header">
+      <h3>
+        <i class="fa-solid fa-leaf" style="color: var(--primary);"></i>
+        <span>Productos Seleccionados</span>
+      </h3>
+      <button class="modal-close-btn" onclick="closeCartDrawer()" aria-label="Cerrar bolsa">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    </div>
+
+    <div class="cart-items-list" id="cartItemsList">
+      <!-- Injected by app.js -->
+    </div>
+
+    <div class="cart-footer">
+      <div class="cart-inquiry-summary">
+        <span>Artículos en tu lista:</span>
+        <span class="cart-inquiry-badge" id="cartItemCountLabel">0 seleccionados</span>
+      </div>
+      <p class="cart-note">
+        <i class="fa-solid fa-comment-dots"></i> Consulta disponibilidad, opciones de envío local en Magdalena o nacional y asesoría de uso por WhatsApp.
+      </p>
+      <button class="btn btn-primary" style="width: 100%;" onclick="checkoutViaWhatsApp()">
+        <i class="fa-brands fa-whatsapp"></i>
+        <span>¡Consultar Productos por WhatsApp!</span>
+      </button>
+      <button class="btn btn-secondary btn-sm" style="width: 100%;" onclick="clearCart()">
+        <i class="fa-regular fa-trash-can"></i> Limpiar Lista
+      </button>
+    </div>
+  </aside>
+
+  <!-- ==========================================================================
+       TOAST NOTIFICATION
+       ========================================================================== -->
+  <div class="toast-notification" id="toast">
+    <div class="toast-icon">
+      <i class="fa-solid fa-circle-check"></i>
+    </div>
+    <div class="toast-message" id="toastMessage">Producto añadido a tu lista</div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="app.js?v=2.2"></script>
+</body>
+</html>

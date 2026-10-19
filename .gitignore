@@ -1,0 +1,13 @@
+# OS files
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+*.stackdump
+[Dd]esktop.ini
+.DS_Store
+
+# Editor & logs
+*.log
+.vscode/
+.idea/
