@@ -1653,7 +1653,7 @@ nav,
   background: rgba(25, 36, 29, 0.65);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
-  z-index: 200;
+  z-index: 2000;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1808,10 +1808,10 @@ nav,
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(25, 36, 29, 0.55);
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
-  z-index: 250;
+  background: rgba(25, 36, 29, 0.60);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 2100; /* MUY SUPERIOR a la navbar fija (1000) */
   opacity: 0;
   visibility: hidden;
   transition: var(--transition);
@@ -1830,8 +1830,8 @@ nav,
   max-width: 440px;
   height: 100%;
   background: var(--bg-surface);
-  box-shadow: -10px 0 40px rgba(25, 36, 29, 0.18);
-  z-index: 260;
+  box-shadow: -10px 0 40px rgba(25, 36, 29, 0.25);
+  z-index: 2200; /* MUY SUPERIOR a la navbar fija (1000) */
   display: flex;
   flex-direction: column;
   transform: translateX(100%);
@@ -1843,20 +1843,48 @@ nav,
 }
 
 .cart-header {
-  padding: 1.8rem 1.8rem 1.2rem;
-  border-bottom: 1px solid var(--border-light);
+  padding: 1.4rem 1.6rem 1.1rem;
+  border-bottom: 1.5px solid var(--border-light);
   display: flex;
   align-items: center;
   justify-content: space-between;
+  background: var(--bg-surface);
+  position: sticky;
+  top: 0;
+  z-index: 10;
 }
 
 .cart-header h3 {
   font-family: var(--font-serif);
-  font-size: 1.5rem;
+  font-size: 1.35rem;
   color: var(--text-main);
   display: flex;
   align-items: center;
   gap: 0.5rem;
+}
+
+.cart-close-btn {
+  background: rgba(44, 107, 70, 0.10);
+  border: 1.5px solid rgba(44, 107, 70, 0.22);
+  width: 42px;
+  height: 42px;
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--primary);
+  cursor: pointer;
+  font-size: 1.35rem;
+  transition: var(--transition);
+  flex-shrink: 0;
+}
+
+.cart-close-btn:hover,
+.cart-close-btn:active {
+  background: var(--primary);
+  color: #FFF;
+  border-color: var(--primary);
+  transform: scale(1.08);
 }
 
 .cart-items-list {
@@ -2853,8 +2881,40 @@ nav,
   }
 
   /* Carrito Drawer en teléfonos */
+  .cart-drawer {
+    width: 100% !important;
+    max-width: 100% !important;
+    z-index: 2200 !important;
+  }
+
+  .cart-drawer-overlay {
+    z-index: 2100 !important;
+  }
+
   .cart-header {
-    padding: 1.25rem 1.1rem;
+    padding: 0.95rem 1.15rem;
+    background: var(--bg-surface);
+    border-bottom: 1.5px solid var(--border-light);
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .cart-header h3 {
+    font-size: 1.15rem;
+  }
+
+  .cart-close-btn {
+    width: 44px;
+    height: 44px;
+    font-size: 1.45rem;
+    background: rgba(44, 107, 70, 0.14);
+    border: 2px solid rgba(44, 107, 70, 0.28);
+    color: var(--primary);
+    box-shadow: 0 2px 10px rgba(44, 107, 70, 0.20);
   }
 
   .cart-items-list {

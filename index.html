@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>(Ancestral Curly - Academia) | Asesorías Especializadas & Botica Natural</title>
   <meta name="description" content="Centro de asesoría especializada en cabello ondulado, rizado y afro. Punto físico en Ciénaga (Magdalena) y atención virtual nacional. Diagnóstico capilar, talleres y productos certificados.">
-  <link rel="stylesheet" href="styles.css?v=2.7">
+  <link rel="stylesheet" href="styles.css?v=2.8">
   <!-- FontAwesome Icons for crisp UI icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
@@ -965,7 +965,7 @@
         <i class="fa-solid fa-leaf" style="color: var(--primary);"></i>
         <span>Productos Seleccionados</span>
       </h3>
-      <button class="modal-close-btn" onclick="closeCartDrawer()" aria-label="Cerrar bolsa">
+      <button class="modal-close-btn cart-close-btn" id="closeCartBtn" onclick="closeCartDrawer()" aria-label="Cerrar bolsa">
         <i class="fa-solid fa-xmark"></i>
       </button>
     </div>
@@ -986,8 +986,11 @@
         <i class="fa-brands fa-whatsapp"></i>
         <span>¡Consultar Productos por WhatsApp!</span>
       </button>
-      <button class="btn btn-secondary btn-sm" style="width: 100%;" onclick="clearCart()">
+      <button class="btn btn-secondary btn-sm" style="width: 100%; margin-top: 0.35rem;" onclick="clearCart()">
         <i class="fa-regular fa-trash-can"></i> Limpiar Lista
+      </button>
+      <button class="btn btn-outline btn-sm" style="width: 100%; margin-top: 0.35rem;" onclick="closeCartDrawer()">
+        <i class="fa-solid fa-arrow-left"></i> Continuar viendo la página
       </button>
     </div>
   </aside>
@@ -1003,6 +1006,6 @@
   </div>
 
   <!-- Scripts -->
-  <script src="app.js?v=2.2"></script>
+  <script src="app.js?v=2.3"></script>
 </body>
 </html>

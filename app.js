@@ -800,6 +800,12 @@ function setupEventListeners() {
   const openCart = document.getElementById('openCartBtn');
   if (openCart) openCart.addEventListener('click', openCartDrawer);
 
+  const closeCart = document.getElementById('closeCartBtn');
+  if (closeCart) closeCart.addEventListener('click', closeCartDrawer);
+
+  const cartOverlay = document.getElementById('cartOverlay');
+  if (cartOverlay) cartOverlay.addEventListener('click', closeCartDrawer);
+
   const mobileToggle = document.getElementById('mobileMenuBtn');
   const navMenu = document.getElementById('navMenu');
   const mobileBackdrop = document.getElementById('mobileNavBackdrop');
