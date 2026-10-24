@@ -178,10 +178,16 @@ function renderProducts() {
 
         <div class="product-footer">
           <div class="product-price">${formatMoney(product.price)}</div>
-          <button class="product-btn-want" onclick="addToCart('${product.id}')" aria-label="Añadir ${escapeHtml(product.title)} a tu bolsa">
-            <i class="fa-solid fa-bag-shopping"></i>
-            <span>¡Lo quiero!</span>
-          </button>
+          <div class="product-btn-group">
+            <button class="product-btn-buy" onclick="buyProductNow('${product.id}')" aria-label="Comprar ${escapeHtml(product.title)} ahora">
+              <i class="fa-solid fa-lock"></i>
+              <span>Comprar</span>
+            </button>
+            <button class="product-btn-want" onclick="addToCart('${product.id}')" aria-label="Añadir ${escapeHtml(product.title)} a tu bolsa">
+              <i class="fa-solid fa-bag-shopping"></i>
+              <span>+ Bolsa</span>
+            </button>
+          </div>
         </div>
       </div>
     </article>
@@ -396,15 +402,33 @@ function checkoutViaWhatsApp() {
 // ==========================================================================
 // BOOKING MODAL (ASESORÍAS PERSONALIZADAS)
 // ==========================================================================
-function openBookingModal(planName = 'Asesoría VIP 1 a 1 & Taller') {
+function openBookingModal(planName = 'Asesoría VIP 1 a 1 & Kit Completo') {
   const modal = document.getElementById('bookingModal');
   const select = document.getElementById('bookPlan');
 
   if (select && planName) {
+    const term = planName.toLowerCase();
+    let matched = false;
+
     for (let i = 0; i < select.options.length; i++) {
-      if (select.options[i].value.includes(planName) || select.options[i].text.includes(planName)) {
+      const val = select.options[i].value.toLowerCase();
+      const txt = select.options[i].text.toLowerCase();
+
+      if (val.includes(term) || txt.includes(term)) {
         select.selectedIndex = i;
+        matched = true;
         break;
+      }
+    }
+
+    // Heuristic fallbacks if exact string differs
+    if (!matched) {
+      if (term.includes('vip')) {
+        select.selectedIndex = 1;
+      } else if (term.includes('familiar') || term.includes('niña') || term.includes('nina')) {
+        select.selectedIndex = 2;
+      } else if (term.includes('diagn') || term.includes('transic')) {
+        select.selectedIndex = 0;
       }
     }
   }
@@ -427,16 +451,16 @@ function handleBookingSubmit(e) {
   const date = document.getElementById('bookDate').value;
   const notes = document.getElementById('bookNotes').value;
 
-  let message = `¡Hola (Ancestral Curly - Academia)! 🌿 Deseo solicitar información y agendar una sesión:\n\n`;
+  let message = `¡Hola (Ancestral Curly - Academia)! 🌿 Deseo solicitar información y agendar mi sesión:\n\n`;
   message += `👤 *Nombre:* ${name}\n`;
-  message += `📋 *Asesoría:* ${plan}\n`;
+  message += `📦 *Plan con Kit Incluido:* ${plan}\n`;
   message += `📍 *Modalidad:* ${modality}\n`;
   message += `🌊 *Tipo de Textura:* ${waveType}\n`;
   message += `🗓️ *Fecha tentativa:* ${date}\n`;
   if (notes) {
     message += `📝 *Detalles de mi caso:* ${notes}\n`;
   }
-  message += `\nQuedo atenta para conocer el valor y coordinar el horario disponible.`;
+  message += `\n✨ Me interesa aprovechar la tarifa especial de paquete con el Kit de productos botánicos. ¿Podrían confirmarme horarios disponibles y opciones de pago? ¡Muchas gracias!`;
 
   const baseUrl = CONFIG.whatsappNumber 
     ? `https://wa.me/${CONFIG.whatsappNumber}?text=`
@@ -446,6 +470,345 @@ function handleBookingSubmit(e) {
   closeBookingModal();
   showToast('¡Solicitud preparada! Redirigiendo a WhatsApp...');
 }
+
+// ==========================================================================
+// CHECKOUT & SIMULACIÓN DE PASARELA DE PAGOS
+// ==========================================================================
+const PLAN_DETAILS = {
+  transicion: {
+    id: 'transicion',
+    name: 'Plan Diagnóstico & Transición + Kit Dúo de Inicio',
+    price: 79000,
+    desc: 'Evaluación capilar personalizada + Kit físico de 2 productos (Shampoo Botánico + Crema de Peinar Grande 400g).',
+    kitItems: 'Shampoo Botánico Equilibrante (250ml) y Crema de Peinar Grande (400g)',
+    isPlan: true
+  },
+  vip: {
+    id: 'vip',
+    name: 'Plan VIP 1 a 1 & Kit Completo Ancestral (4 Productos)',
+    price: 155000,
+    desc: 'Sesión intensiva 1 a 1 + Taller práctico de definición + 30 días de seguimiento WhatsApp + Colección completa de 4 productos.',
+    kitItems: 'Shampoo (250ml), Mascarilla Hidronutritiva (300g), Aceite Sellador (60ml) y Crema Grande (400g)',
+    isPlan: true
+  },
+  familiar: {
+    id: 'familiar',
+    name: 'Plan Familiar & Niñas + Kit Cuidado Suave Infantil',
+    price: 129000,
+    desc: 'Asesoría interactiva para madre y menor + Kit físico de 3 productos para desenredo suave sin dolor ni lágrimas.',
+    kitItems: 'Mascarilla Hidronutritiva (300g), Crema de Peinar Grande (400g) y Aceite Sellador (60ml)',
+    isPlan: true
+  }
+};
+
+let currentCheckout = {
+  type: 'plan',
+  id: 'vip',
+  title: '',
+  desc: '',
+  price: 0,
+  isPlan: false,
+  items: []
+};
+
+let lastProcessedOrder = null;
+
+function openCheckout(type = 'plan', payload = 'vip') {
+  const modal = document.getElementById('checkoutModal');
+  if (!modal) return;
+
+  // Cerrar carrito o booking si estaban abiertos
+  closeCartDrawer();
+  closeBookingModal();
+
+  const planFields = document.getElementById('checkoutPlanFields');
+  const modalTitle = document.getElementById('checkoutModalTitle');
+  const modalSubtitle = document.getElementById('checkoutModalSubtitle');
+  const itemTitle = document.getElementById('checkoutItemTitle');
+  const itemDesc = document.getElementById('checkoutItemDesc');
+  const totalAmount = document.getElementById('checkoutTotalAmount');
+  const btnSubmitText = document.getElementById('btnSubmitPaymentText');
+
+  // Reset de vistas
+  const formView = document.getElementById('checkoutFormView');
+  const simView = document.getElementById('checkoutSimulationView');
+  const receiptContainer = document.getElementById('checkoutReceiptContainer');
+  const iconWrap = document.getElementById('simCenterIconWrap');
+  if (formView) formView.style.display = 'block';
+  if (simView) simView.style.display = 'none';
+  if (receiptContainer) receiptContainer.style.display = 'none';
+  if (iconWrap) iconWrap.classList.remove('approved');
+
+  if (type === 'plan') {
+    let key = 'vip';
+    if (typeof payload === 'string') {
+      const term = payload.toLowerCase();
+      if (term.includes('transic') || term.includes('diagn')) key = 'transicion';
+      else if (term.includes('familiar') || term.includes('niña') || term.includes('nina')) key = 'familiar';
+      else key = 'vip';
+    }
+    const plan = PLAN_DETAILS[key] || PLAN_DETAILS.vip;
+
+    currentCheckout = {
+      type: 'plan',
+      id: plan.id,
+      title: plan.name,
+      desc: `${plan.desc} • Incluye envío del Kit físico a Ciénaga o despacho a toda Colombia.`,
+      price: plan.price,
+      isPlan: true,
+      items: [plan.name]
+    };
+
+    if (modalTitle) modalTitle.textContent = 'Comprar Plan con Kit Incluido';
+    if (modalSubtitle) modalSubtitle.textContent = 'Especifica tus datos de entrega para recibir el Kit y correo para la confirmación de la sesión.';
+    if (itemTitle) itemTitle.textContent = plan.name;
+    if (itemDesc) itemDesc.textContent = plan.desc;
+    if (totalAmount) totalAmount.textContent = formatMoney(plan.price);
+    if (btnSubmitText) btnSubmitText.textContent = `Pagar en Línea (${formatMoney(plan.price)})`;
+    if (planFields) planFields.style.display = 'block';
+
+  } else if (type === 'cart') {
+    if (cart.length === 0) {
+      showToast('Tu bolsa está vacía. Añade un producto antes de proceder al pago.');
+      return;
+    }
+
+    const total = cart.reduce((sum, item) => sum + (item.price || 0) * item.qty, 0);
+    const names = cart.map(item => `${item.qty}x ${item.title}`).join(', ');
+
+    currentCheckout = {
+      type: 'cart',
+      id: 'cart',
+      title: `Pedido de Productos Botánicos (${cart.reduce((s, i) => s + i.qty, 0)} artículos)`,
+      desc: names,
+      price: total,
+      isPlan: false,
+      items: [...cart]
+    };
+
+    if (modalTitle) modalTitle.textContent = 'Finalizar Compra de Productos';
+    if (modalSubtitle) modalSubtitle.textContent = 'Especifica tu dirección de entrega en Ciénaga o a nivel nacional.';
+    if (itemTitle) itemTitle.textContent = currentCheckout.title;
+    if (itemDesc) itemDesc.textContent = names;
+    if (totalAmount) totalAmount.textContent = formatMoney(total);
+    if (btnSubmitText) btnSubmitText.textContent = `Pagar en Línea (${formatMoney(total)})`;
+    if (planFields) planFields.style.display = 'none';
+
+  } else if (type === 'single') {
+    const prod = products.find(p => p.id === payload) || products[0];
+    currentCheckout = {
+      type: 'single',
+      id: prod.id,
+      title: prod.title,
+      desc: `${prod.botanical || 'Extractos botánicos certificados'} • ${prod.desc || ''}`,
+      price: prod.price,
+      isPlan: false,
+      items: [{ title: prod.title, qty: 1, price: prod.price }]
+    };
+
+    if (modalTitle) modalTitle.textContent = 'Finalizar Compra de Producto';
+    if (modalSubtitle) modalSubtitle.textContent = 'Especifica tu dirección de residencia para el despacho del producto.';
+    if (itemTitle) itemTitle.textContent = prod.title;
+    if (itemDesc) itemDesc.textContent = prod.desc;
+    if (totalAmount) totalAmount.textContent = formatMoney(prod.price);
+    if (btnSubmitText) btnSubmitText.textContent = `Pagar en Línea (${formatMoney(prod.price)})`;
+    if (planFields) planFields.style.display = 'none';
+  }
+
+  modal.classList.add('active');
+}
+
+function buyProductNow(productId) {
+  addToCart(productId);
+  openCheckout('cart');
+}
+
+function closeCheckoutModal() {
+  const modal = document.getElementById('checkoutModal');
+  if (modal) modal.classList.remove('active');
+}
+
+function handleCheckoutSubmit(e) {
+  e.preventDefault();
+
+  const name = document.getElementById('checkoutName').value.trim();
+  const phone = document.getElementById('checkoutPhone').value.trim();
+  const email = document.getElementById('checkoutEmail').value.trim();
+  const city = document.getElementById('checkoutCity').value.trim();
+  const address = document.getElementById('checkoutAddress').value.trim();
+  const modalityEl = document.getElementById('checkoutModality');
+  const dateEl = document.getElementById('checkoutDate');
+  const modality = modalityEl ? modalityEl.value : '';
+  const date = dateEl ? dateEl.value : '';
+
+  const selectedMethodRadio = document.querySelector('input[name="checkoutPaymentMethod"]:checked');
+  const paymentMethod = selectedMethodRadio ? selectedMethodRadio.value : 'PSE / Cuentas Bancarias';
+
+  const orderRef = `#ANC-2026-${Math.floor(1000 + Math.random() * 9000)}`;
+
+  lastProcessedOrder = {
+    ref: orderRef,
+    name,
+    phone,
+    email,
+    city,
+    address,
+    modality,
+    date,
+    paymentMethod,
+    checkout: { ...currentCheckout },
+    total: currentCheckout.price
+  };
+
+  // Ocultar formulario y mostrar pantalla de procesamiento (sin comprobante todavía)
+  const formView = document.getElementById('checkoutFormView');
+  const simView = document.getElementById('checkoutSimulationView');
+  const receiptContainer = document.getElementById('checkoutReceiptContainer');
+  const iconWrap = document.getElementById('simCenterIconWrap');
+
+  if (formView) formView.style.display = 'none';
+  if (simView) simView.style.display = 'flex';
+  if (receiptContainer) receiptContainer.style.display = 'none';
+  if (iconWrap) iconWrap.classList.remove('approved');
+
+  // Llenar datos de la simulación para cuando se visualice el comprobante
+  document.getElementById('simOrderRef').textContent = orderRef;
+  document.getElementById('simReceiptName').textContent = name;
+  document.getElementById('simReceiptAddress').textContent = `${address}, ${city}`;
+  document.getElementById('simReceiptEmail').textContent = email;
+  document.getElementById('simReceiptMethod').textContent = paymentMethod;
+  document.getElementById('simReceiptAmount').textContent = formatMoney(currentCheckout.price);
+
+  // Animación fidedigna de pasarela bancaria
+  const title = document.getElementById('simTitle');
+  const subtitle = document.getElementById('simSubtitle');
+  const progressBar = document.getElementById('simProgressBar');
+  const step1 = document.getElementById('simStep1');
+  const step2 = document.getElementById('simStep2');
+  const step3 = document.getElementById('simStep3');
+  const icon = document.getElementById('simCenterIcon');
+
+  if (title) title.textContent = 'Procesando Pago Seguro';
+  if (subtitle) subtitle.textContent = 'Por favor, espera un momento mientras validamos la transacción con tu entidad bancaria...';
+  if (progressBar) progressBar.style.width = '30%';
+  if (icon) icon.className = 'fa-solid fa-lock';
+
+  if (step1) {
+    step1.className = 'sim-step-item done';
+    const iEl = step1.querySelector('i');
+    if (iEl) iEl.className = 'fa-solid fa-circle-check';
+  }
+  if (step2) {
+    step2.className = 'sim-step-item active';
+    const iEl = step2.querySelector('i');
+    if (iEl) iEl.className = 'fa-solid fa-spinner fa-spin';
+  }
+  if (step3) {
+    step3.className = 'sim-step-item pending';
+    const iEl = step3.querySelector('i');
+    if (iEl) iEl.className = 'fa-regular fa-circle';
+    const textSpan = step3.querySelector('span');
+    if (textSpan) textSpan.textContent = 'Procesando autorización bancaria...';
+  }
+
+  // Paso 2: Conectando banco (1.5s)
+  setTimeout(() => {
+    if (progressBar) progressBar.style.width = '70%';
+    if (title) title.textContent = `Procesando pago vía ${paymentMethod}`;
+    if (subtitle) subtitle.textContent = 'Verificando datos y comunicando con la entidad bancaria...';
+    if (step2) {
+      step2.className = 'sim-step-item done';
+      const iEl = step2.querySelector('i');
+      if (iEl) iEl.className = 'fa-solid fa-circle-check';
+    }
+    if (step3) {
+      step3.className = 'sim-step-item active';
+      const iEl = step3.querySelector('i');
+      if (iEl) iEl.className = 'fa-solid fa-spinner fa-spin';
+    }
+  }, 1600);
+
+  // Paso 3: Confirmación exitosa de pago -> Revelar Comprobante y Botones de acción (3.2s)
+  setTimeout(() => {
+    if (progressBar) progressBar.style.width = '100%';
+    if (title) title.textContent = '¡Transacción Aprobada!';
+    if (subtitle) subtitle.textContent = 'Tu pago ha sido procesado exitosamente. Aquí tienes tu comprobante oficial:';
+    if (icon) icon.className = 'fa-solid fa-circle-check';
+    if (iconWrap) iconWrap.classList.add('approved');
+
+    if (step3) {
+      step3.className = 'sim-step-item done';
+      const iEl = step3.querySelector('i');
+      if (iEl) iEl.className = 'fa-solid fa-circle-check';
+      const textSpan = step3.querySelector('span');
+      if (textSpan) textSpan.textContent = 'Autorización bancaria confirmada y aprobada';
+    }
+
+    // AHORA SÍ MOSTRAMOS EL COMPROBANTE Y LOS BOTONES DE ACCIÓN
+    if (receiptContainer) {
+      receiptContainer.style.display = 'flex';
+      try {
+        receiptContainer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      } catch (err) {}
+    }
+
+    showToast('¡Transacción aprobada! Comprobante generado con éxito.');
+  }, 3200);
+}
+
+function consultCurrentOrderViaWhatsApp() {
+  const name = document.getElementById('checkoutName') ? document.getElementById('checkoutName').value.trim() : '';
+  const city = document.getElementById('checkoutCity') ? document.getElementById('checkoutCity').value.trim() : '';
+
+  let message = `¡Hola (Ancestral Curly - Academia)! 🌿 Deseo consultar información antes de comprar:\n\n`;
+  if (name) message += `👤 *Nombre:* ${name}\n`;
+  if (city) message += `📍 *Ciudad:* ${city}\n`;
+  message += `📦 *Artículo / Plan:* ${currentCheckout.title}\n`;
+  message += `💰 *Valor:* ${formatMoney(currentCheckout.price)}\n\n`;
+  message += `¿Tienen disponibilidad y me podrían asesorar para completar la compra? ¡Muchas gracias!`;
+
+  const baseUrl = CONFIG.whatsappNumber 
+    ? `https://wa.me/${CONFIG.whatsappNumber}?text=`
+    : `https://api.whatsapp.com/send?text=`;
+
+  window.open(`${baseUrl}${encodeURIComponent(message)}`, '_blank');
+}
+
+function notifyOrderViaWhatsApp() {
+  if (!lastProcessedOrder) {
+    consultCurrentOrderViaWhatsApp();
+    return;
+  }
+
+  const o = lastProcessedOrder;
+  let message = `¡Hola (Ancestral Curly - Academia)! 🌿 Acabo de realizar el pago de mi pedido:\n\n`;
+  message += `✅ *Estado:* Transacción Aprobada\n`;
+  message += `🔖 *Referencia:* ${o.ref}\n`;
+  message += `👤 *Cliente:* ${o.name}\n`;
+  message += `📱 *Teléfono:* ${o.phone}\n`;
+  message += `📧 *Correo:* ${o.email}\n`;
+  message += `🏠 *Dirección de Entrega:* ${o.address}, ${o.city}\n`;
+  message += `📦 *Producto / Plan:* ${o.checkout.title}\n`;
+  if (o.modality) message += `🗓️ *Modalidad Asesoría:* ${o.modality} ${o.date ? `(Fecha tentativa: ${o.date})` : ''}\n`;
+  message += `💳 *Método de Pago:* ${o.paymentMethod}\n`;
+  message += `💰 *Total Pagado:* ${formatMoney(o.total)}\n\n`;
+  message += `Adjunto mi comprobante para coordinar el despacho o el agendamiento. ¡Muchas gracias!`;
+
+  const baseUrl = CONFIG.whatsappNumber 
+    ? `https://wa.me/${CONFIG.whatsappNumber}?text=`
+    : `https://api.whatsapp.com/send?text=`;
+
+  window.open(`${baseUrl}${encodeURIComponent(message)}`, '_blank');
+}
+
+// Selector visual de medios de pago
+document.addEventListener('change', function(e) {
+  if (e.target && e.target.name === 'checkoutPaymentMethod') {
+    document.querySelectorAll('.payment-method-card').forEach(card => card.classList.remove('active'));
+    const parentCard = e.target.closest('.payment-method-card');
+    if (parentCard) parentCard.classList.add('active');
+  }
+});
 
 // ==========================================================================
 // DIAGNOSTIC QUIZ (INTERACTIVE 3 STEPS - ADAPTADO AL PDF)
@@ -618,6 +981,16 @@ function setupNavSlider() {
 
   function updateArrows() {
     if (!prevBtn || !nextBtn) return;
+    if (window.innerWidth > 1024) {
+      prevBtn.classList.remove('is-visible');
+      nextBtn.classList.remove('is-visible');
+      if (wrapper) {
+        wrapper.classList.remove('has-overflow');
+        wrapper.classList.remove('has-left-overflow');
+      }
+      return;
+    }
+
     const maxScroll = container.scrollWidth - container.clientWidth;
     if (maxScroll <= 8) {
       prevBtn.classList.remove('is-visible');
@@ -629,9 +1002,8 @@ function setupNavSlider() {
       return;
     }
 
-    // Flecha izquierda: se muestra ÚNICAMENTE si el usuario se ha desplazado más de 20px
-    // Así el botón de "Inicio" nunca se traslapa ni se tapa de entrada
-    if (container.scrollLeft > 20) {
+    // Flecha izquierda: se muestra si hay desplazamiento
+    if (container.scrollLeft > 16) {
       prevBtn.classList.add('is-visible');
       if (wrapper) wrapper.classList.add('has-left-overflow');
     } else {
@@ -640,7 +1012,7 @@ function setupNavSlider() {
     }
 
     // Flecha derecha: visible mientras queden botones por descubrir
-    if (container.scrollLeft < maxScroll - 20) {
+    if (container.scrollLeft < maxScroll - 16) {
       nextBtn.classList.add('is-visible');
       if (wrapper) wrapper.classList.add('has-overflow');
     } else {

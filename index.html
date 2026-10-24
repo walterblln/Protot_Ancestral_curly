@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>(Ancestral Curly - Academia) | Asesorías Especializadas & Catálogo de Productos</title>
   <meta name="description" content="Centro de asesoría especializada en cabello ondulado, rizado y afro. Punto físico en Ciénaga (Magdalena) y atención virtual nacional. Diagnóstico capilar, talleres y productos certificados.">
-  <link rel="stylesheet" href="styles.css?v=3.0">
+  <link rel="stylesheet" href="styles.css?v=3.2">
   <!-- FontAwesome Icons for crisp UI icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
@@ -40,7 +40,7 @@
             <li><a href="#testimonios" class="nav-link">Testimonios</a></li>
           </ul>
         </div>
-        <button class="nav-arrow-btn nav-arrow-right" id="navArrowRight" aria-label="Ver más botones">
+        <button class="nav-arrow-btn nav-arrow-right" id="navArrowRight" aria-label="Ver más botones" style="display: none;">
           <i class="fa-solid fa-chevron-right"></i>
         </button>
       </nav>
@@ -83,13 +83,17 @@
         </p>
 
         <div class="hero-cta">
-          <button class="btn btn-primary" id="heroBookBtn" onclick="openBookingModal('Asesoría VIP 1 a 1')">
-            <i class="fa-solid fa-calendar-days"></i>
-            <span>Consultar y Agendar Asesoría</span>
+          <button class="btn btn-primary" id="heroBookBtn" onclick="openCheckout('plan', 'vip')">
+            <i class="fa-solid fa-credit-card"></i>
+            <span>Comprar Plan con Kit</span>
           </button>
-          <a href="#botica" class="btn btn-secondary" id="heroShopBtn">
+          <button class="btn btn-secondary" onclick="openBookingModal('Asesoría VIP 1 a 1')">
+            <i class="fa-brands fa-whatsapp"></i>
+            <span>Consultar por WhatsApp</span>
+          </button>
+          <a href="#botica" class="btn btn-outline" id="heroShopBtn">
             <i class="fa-solid fa-leaf"></i>
-            <span>Ver Productos Recomendados</span>
+            <span>Ver Productos</span>
           </a>
         </div>
 
@@ -377,12 +381,16 @@
               </div>
             </div>
 
-            <div style="display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; margin-top: 1rem;">
-              <button class="btn btn-primary" onclick="openBookingModal('Asesoría con Diagnóstico Personalizado')">
-                <i class="fa-regular fa-calendar-check"></i>
-                <span>Consultar Asesoría para Mi Caso</span>
+            <div style="display: flex; gap: 0.85rem; flex-wrap: wrap; justify-content: center; margin-top: 1.25rem;">
+              <button class="btn btn-primary" onclick="openCheckout('plan', 'transicion')">
+                <i class="fa-solid fa-lock"></i>
+                <span>Comprar Plan Recomendado ($79.000)</span>
               </button>
-              <button class="btn btn-secondary" onclick="restartQuiz()">
+              <button class="btn btn-secondary" onclick="openBookingModal('Asesoría con Diagnóstico Personalizado')">
+                <i class="fa-brands fa-whatsapp"></i>
+                <span>Consultar por WhatsApp</span>
+              </button>
+              <button class="btn btn-outline btn-sm" onclick="restartQuiz()">
                 <i class="fa-solid fa-rotate-right"></i>
                 <span>Repetir Diagnóstico</span>
               </button>
@@ -394,13 +402,332 @@
   </section>
 
   <!-- ==========================================================================
-       ASESORÍAS PERSONALIZADAS (SECCIÓN PRINCIPAL)
+       PLANES Y ASESORÍAS CON KITS (OBJETIVO AGENDAR ASESORÍA)
        ========================================================================== -->
   <section class="asesorias-section" id="asesorias">
     <div class="container">
+      <!-- Savings Announcement Banner / Encabezado Principal de Planes -->
+      <div class="plans-savings-banner" id="planesKits">
+        <div class="savings-banner-badge"><i class="fa-solid fa-gift"></i> Beneficio Exclusivo en Combo</div>
+        <div class="savings-banner-content">
+          <h2 class="savings-banner-title">¡Todos nuestros planes ahora incluyen tu Kit de Productos Botánicos!</h2>
+          <p class="savings-banner-desc">
+            Aprende la técnica adecuada para tu patrón con nuestra especialista y <strong>recibe en mano o a domicilio</strong> los productos exactos que tu cabello necesita, ahorrando <strong>hasta un 27% frente al precio individual en botica</strong>.
+          </p>
+        </div>
+      </div>
+
+      <!-- Service Tiers / Planes con Kit de Productos Incluido -->
+      <div class="tiers-grid">
+        <!-- Tier 1: Básico con Kit Dúo de Inicio -->
+        <div class="tier-card" id="tierCard1" data-tier="transicion">
+          <div class="tier-header">
+            <span class="tier-type-tag"><i class="fa-solid fa-seedling"></i> Rutina de Inicio</span>
+            <h3 class="tier-name">Diagnóstico & Transición</h3>
+            <p class="tier-tagline">Ideal para mujeres y jóvenes que desean salir del alisado o químicos y armar su primera rutina botánica limpia.</p>
+          </div>
+          
+          <div class="tier-inquiry-box">
+            <span class="tier-inquiry-title"><i class="fa-solid fa-laptop"></i> Modalidad 100% Virtual</span>
+            <span class="tier-inquiry-sub">Disponible para Ciénaga, Magdalena y toda Colombia</span>
+          </div>
+
+          <!-- Pricing Breakdown -->
+          <div class="tier-pricing-box">
+            <div class="tier-compare-row">
+              <span class="tier-old-price">Por separado: $107.000</span>
+              <span class="tier-save-badge"><i class="fa-solid fa-tag"></i> Ahorras $28.000 (-26%)</span>
+            </div>
+            <div class="tier-price-main">
+              <span class="tier-currency">$</span>
+              <span class="tier-amount">79.000</span>
+              <span class="tier-period">COP</span>
+            </div>
+            <div class="tier-price-legend">
+              <i class="fa-solid fa-circle-check"></i> Asesoría + Kit Dúo de Productos Incluido
+            </div>
+          </div>
+
+          <!-- Kit Box -->
+          <div class="tier-kit-card">
+            <div class="tier-kit-header">
+              <span class="tier-kit-badge"><i class="fa-solid fa-box-open"></i> Kit Incluido (2 Productos)</span>
+              <span class="tier-kit-val">En botica: $62.000</span>
+            </div>
+            <h4 class="tier-kit-title">Kit Dúo de Inicio Botánico</h4>
+            <ul class="tier-kit-list">
+              <li class="tier-kit-item">
+                <i class="fa-solid fa-bottle-droplet"></i>
+                <div class="kit-item-info">
+                  <span class="item-title">Shampoo Botánico Equilibrante</span>
+                  <span class="item-desc">250ml • Limpieza sin sulfatos con Romero & Aloe ($25.000)</span>
+                </div>
+              </li>
+              <li class="tier-kit-item">
+                <i class="fa-solid fa-pump-soap"></i>
+                <div class="kit-item-info">
+                  <span class="item-title">Crema de Peinar Definición Profunda</span>
+                  <span class="item-desc">400g Grande • Fijación y nutrición con Linaza & Karité ($37.000)</span>
+                </div>
+              </li>
+            </ul>
+            <div class="tier-kit-summary">
+              <i class="fa-solid fa-truck-fast"></i> Entrega física en Ciénaga o despacho a toda Colombia
+            </div>
+          </div>
+
+          <ul class="tier-features-list">
+            <li class="highlight">
+              <i class="fa-solid fa-check"></i>
+              <span><strong>Evaluación fotográfica</strong> de tu hebra seca y mojada</span>
+            </li>
+            <li>
+              <i class="fa-solid fa-check"></i>
+              <span>Identificación de patrón (Ondas 2A-2C, Rizos 3A-3C, Afro 4A-4C)</span>
+            </li>
+            <li>
+              <i class="fa-solid fa-check"></i>
+              <span>Test virtual de porosidad y nivel de elasticidad capilar</span>
+            </li>
+            <li>
+              <i class="fa-solid fa-check"></i>
+              <span>Guía digital con cronograma capilar de 4 semanas</span>
+            </li>
+            <li>
+              <i class="fa-solid fa-check"></i>
+              <span>Lista de ingredientes aptos y recomendados para tu textura</span>
+            </li>
+          </ul>
+
+          <div class="tier-actions-group">
+            <button class="btn btn-primary tier-btn" onclick="openCheckout('plan', 'transicion')">
+              <i class="fa-solid fa-lock"></i>
+              <span>Pagar Plan & Kit ($79.000)</span>
+            </button>
+            <button class="tier-btn-sub" onclick="openBookingModal('Diagnóstico & Transición + Kit Dúo')">
+              <i class="fa-brands fa-whatsapp"></i>
+              <span>Consultar antes de comprar</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Tier 2: VIP con Kit Completo (4 productos) -->
+        <div class="tier-card featured" id="tierCard2" data-tier="vip">
+          <div class="tier-badge"><i class="fa-solid fa-crown"></i> Más Elegida • Kit Completo</div>
+          <div class="tier-header">
+            <span class="tier-type-tag featured-tag"><i class="fa-solid fa-wand-magic-sparkles"></i> Transformación Integral</span>
+            <h3 class="tier-name">Asesoría VIP 1 a 1 & Taller</h3>
+            <p class="tier-tagline">Sesión interactiva en vivo, práctica intensiva de definición y la colección completa de nuestros 4 productos botánicos.</p>
+          </div>
+
+          <div class="tier-inquiry-box">
+            <span class="tier-inquiry-title"><i class="fa-solid fa-star"></i> Presencial o Virtual</span>
+            <span class="tier-inquiry-sub">Estudio en Ciénaga (Magdalena) o videollamada Google Meet</span>
+          </div>
+
+          <!-- Pricing Breakdown -->
+          <div class="tier-pricing-box">
+            <div class="tier-compare-row">
+              <span class="tier-old-price">Por separado: $212.000</span>
+              <span class="tier-save-badge vip-save"><i class="fa-solid fa-fire"></i> Ahorras $57.000 (-27%)</span>
+            </div>
+            <div class="tier-price-main">
+              <span class="tier-currency">$</span>
+              <span class="tier-amount">155.000</span>
+              <span class="tier-period">COP</span>
+            </div>
+            <div class="tier-price-legend featured-legend">
+              <i class="fa-solid fa-sparkles"></i> Asesoría VIP + Los 4 Productos del Catálogo
+            </div>
+          </div>
+
+          <!-- Kit Box -->
+          <div class="tier-kit-card featured-kit-card">
+            <div class="tier-kit-header">
+              <span class="tier-kit-badge vip-badge"><i class="fa-solid fa-gem"></i> Kit Completo (4 Productos)</span>
+              <span class="tier-kit-val">En botica: $127.000</span>
+            </div>
+            <h4 class="tier-kit-title">Colección Botánica Ancestral Completa</h4>
+            <ul class="tier-kit-list">
+              <li class="tier-kit-item">
+                <i class="fa-solid fa-bottle-droplet"></i>
+                <div class="kit-item-info">
+                  <span class="item-title">Shampoo Botánico Equilibrante</span>
+                  <span class="item-desc">250ml • Limpieza sin sulfatos con Romero & Aloe ($25.000)</span>
+                </div>
+              </li>
+              <li class="tier-kit-item">
+                <i class="fa-solid fa-jar"></i>
+                <div class="kit-item-info">
+                  <span class="item-title">Tratamiento Mascarilla Hidronutritiva</span>
+                  <span class="item-desc">300g • Murumuru Amazónico & Mucílago de Linaza ($35.000)</span>
+                </div>
+              </li>
+              <li class="tier-kit-item">
+                <i class="fa-solid fa-droplet"></i>
+                <div class="kit-item-info">
+                  <span class="item-title">Aceite Botánico Nutritivo & Sellador</span>
+                  <span class="item-desc">60ml • Argán Puro Prensado, Jojoba & Romero ($30.000)</span>
+                </div>
+              </li>
+              <li class="tier-kit-item">
+                <i class="fa-solid fa-pump-soap"></i>
+                <div class="kit-item-info">
+                  <span class="item-title">Crema de Peinar Definición Profunda</span>
+                  <span class="item-desc">400g Grande • Definición flexible y duradera ($37.000)</span>
+                </div>
+              </li>
+            </ul>
+            <div class="tier-kit-summary">
+              <i class="fa-solid fa-circle-check"></i> Rutina completa: Limpieza, Nutrición, Definición y Sellado
+            </div>
+          </div>
+
+          <ul class="tier-features-list">
+            <li class="highlight">
+              <i class="fa-solid fa-check"></i>
+              <span><strong>Sesión 1 a 1 interactiva intensiva</strong> (Presencial o Virtual)</span>
+            </li>
+            <li class="highlight">
+              <i class="fa-solid fa-check"></i>
+              <span>Auditoría de todos los productos que tienes en casa</span>
+            </li>
+            <li>
+              <i class="fa-solid fa-check"></i>
+              <span><strong>Taller práctico en vivo:</strong> Scrunch, Plopping y control de frizz</span>
+            </li>
+            <li>
+              <i class="fa-solid fa-check"></i>
+              <span>Diseño de rutina semanal de lavado, nutrición y estilizado</span>
+            </li>
+            <li class="highlight">
+              <i class="fa-solid fa-check"></i>
+              <span><strong>Acompañamiento directo vía WhatsApp por 30 días</strong></span>
+            </li>
+          </ul>
+
+          <div class="tier-actions-group">
+            <button class="btn btn-primary tier-btn" onclick="openCheckout('plan', 'vip')">
+              <i class="fa-solid fa-lock"></i>
+              <span>Pagar Plan VIP & Kit ($155.000)</span>
+            </button>
+            <button class="tier-btn-sub" onclick="openBookingModal('Asesoría VIP 1 a 1 & Kit Completo')">
+              <i class="fa-brands fa-whatsapp"></i>
+              <span>Consultar antes de comprar</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Tier 3: Familiar con Kit de 3 productos -->
+        <div class="tier-card" id="tierCard3" data-tier="familiar">
+          <div class="tier-header">
+            <span class="tier-type-tag"><i class="fa-solid fa-heart"></i> Amor & Cuidado Familiar</span>
+            <h3 class="tier-name">Asesoría Familiar & Niñas</h3>
+            <p class="tier-tagline">Diseñada para madres, padres y acudientes que desean aprender a cuidar las ondas y rizos de niñas y adolescentes sin dolor.</p>
+          </div>
+
+          <div class="tier-inquiry-box">
+            <span class="tier-inquiry-title"><i class="fa-solid fa-hands-holding-child"></i> Enfoque Familiar</span>
+            <span class="tier-inquiry-sub">Presencial en Ciénaga o Virtual con la menor</span>
+          </div>
+
+          <!-- Pricing Breakdown -->
+          <div class="tier-pricing-box">
+            <div class="tier-compare-row">
+              <span class="tier-old-price">Por separado: $172.000</span>
+              <span class="tier-save-badge"><i class="fa-solid fa-tag"></i> Ahorras $43.000 (-25%)</span>
+            </div>
+            <div class="tier-price-main">
+              <span class="tier-currency">$</span>
+              <span class="tier-amount">129.000</span>
+              <span class="tier-period">COP</span>
+            </div>
+            <div class="tier-price-legend">
+              <i class="fa-solid fa-circle-check"></i> Asesoría + Kit Desenredo Suave (3 Prods)
+            </div>
+          </div>
+
+          <!-- Kit Box -->
+          <div class="tier-kit-card">
+            <div class="tier-kit-header">
+              <span class="tier-kit-badge"><i class="fa-solid fa-child"></i> Kit Infantil (3 Productos)</span>
+              <span class="tier-kit-val">En botica: $102.000</span>
+            </div>
+            <h4 class="tier-kit-title">Kit Desenredo Suave & Protección</h4>
+            <ul class="tier-kit-list">
+              <li class="tier-kit-item">
+                <i class="fa-solid fa-jar"></i>
+                <div class="kit-item-info">
+                  <span class="item-title">Tratamiento Mascarilla Hidronutritiva</span>
+                  <span class="item-desc">300g • Desenredo fácil en la ducha sin lágrimas ($35.000)</span>
+                </div>
+              </li>
+              <li class="tier-kit-item">
+                <i class="fa-solid fa-pump-soap"></i>
+                <div class="kit-item-info">
+                  <span class="item-title">Crema de Peinar Definición Profunda</span>
+                  <span class="item-desc">400g Grande • Definición suave y peinados escolares ($37.000)</span>
+                </div>
+              </li>
+              <li class="tier-kit-item">
+                <i class="fa-solid fa-droplet"></i>
+                <div class="kit-item-info">
+                  <span class="item-title">Aceite Botánico Nutritivo & Sellador</span>
+                  <span class="item-desc">60ml • Sellado de puntas, brillo y trenzado sin frizz ($30.000)</span>
+                </div>
+              </li>
+            </ul>
+            <div class="tier-kit-summary">
+              <i class="fa-solid fa-feather"></i> Fórmulas botánicas seguras sin alcoholes ni químicos agresivos
+            </div>
+          </div>
+
+          <ul class="tier-features-list">
+            <li class="highlight">
+              <i class="fa-solid fa-check"></i>
+              <span><strong>Técnicas de desenredo suave y sin dolor</strong> para niñas</span>
+            </li>
+            <li>
+              <i class="fa-solid fa-check"></i>
+              <span>Selección de fórmulas botánicas suaves sin químicos agresivos</span>
+            </li>
+            <li class="highlight">
+              <i class="fa-solid fa-check"></i>
+              <span>Peinados escolares protectores y mantenimiento nocturno</span>
+            </li>
+            <li>
+              <i class="fa-solid fa-check"></i>
+              <span>Educación en autoestima y orgullo por el cabello natural</span>
+            </li>
+            <li>
+              <i class="fa-solid fa-check"></i>
+              <span>Acompañamiento a la madre/cuidadora en la rutina del hogar</span>
+            </li>
+          </ul>
+
+          <div class="tier-actions-group">
+            <button class="btn btn-primary tier-btn" onclick="openCheckout('plan', 'familiar')">
+              <i class="fa-solid fa-lock"></i>
+              <span>Pagar Plan Familiar & Kit ($129.000)</span>
+            </button>
+            <button class="tier-btn-sub" onclick="openBookingModal('Asesoría Familiar & Kit Cuidado Suave')">
+              <i class="fa-brands fa-whatsapp"></i>
+              <span>Consultar antes de comprar</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       TALLERES PRÁCTICOS & METODOLOGÍA (SECCIÓN INDEPENDIENTE)
+       ========================================================================== -->
+  <section class="talleres-showcase-section" id="talleres">
+    <div class="container">
       <div class="section-header">
         <span class="badge-pill badge-green section-tag">
-          <i class="fa-solid fa-gem"></i> Nuestro Enfoque Principal
+          <i class="fa-solid fa-chalkboard-user"></i> Metodología & Talleres
         </span>
         <h2 class="section-title">Asesorías Personalizadas & <em>Talleres Prácticos</em></h2>
         <p class="section-description">
@@ -444,130 +771,12 @@
               <span><strong>Comunidad & Confianza:</strong> Seguimiento cercano vía WhatsApp para resolver dudas en tu día a día.</span>
             </li>
           </ul>
-        </div>
-      </div>
-
-      <!-- Service Tiers / Planes (Adaptados a los 3 perfiles del PDF) -->
-      <div class="tiers-grid">
-        <!-- Tier 1 -->
-        <div class="tier-card" id="tierCard1" data-tier="transicion" data-future-price="65000">
-          <div class="tier-header">
-            <h3 class="tier-name">Diagnóstico & Transición</h3>
-            <p class="tier-tagline">Ideal para mujeres y jóvenes que desean evaluar su patrón, salir del alisado y armar su primer cronograma capilar.</p>
+          <div style="margin-top: 1.25rem;">
+            <a href="#asesorias" class="btn btn-primary btn-sm">
+              <i class="fa-regular fa-calendar-check"></i>
+              <span>Ver Planes con Kit Incluido</span>
+            </a>
           </div>
-          
-          <div class="tier-inquiry-box">
-            <span class="tier-inquiry-title"><i class="fa-solid fa-leaf"></i> Modalidad 100% Virtual</span>
-            <span class="tier-inquiry-sub">Disponible para todo el Magdalena y Colombia</span>
-          </div>
-
-          <ul class="tier-features-list">
-            <li class="highlight">
-              <i class="fa-solid fa-check"></i>
-              <span>Evaluación fotográfica de tu hebra seca y mojada</span>
-            </li>
-            <li>
-              <i class="fa-solid fa-check"></i>
-              <span>Identificación de patrón (Ondas 2A-2C, Rizos 3A-3C, Afro 4A-4C)</span>
-            </li>
-            <li>
-              <i class="fa-solid fa-check"></i>
-              <span>Test de porosidad y nivel de elasticidad capilar</span>
-            </li>
-            <li>
-              <i class="fa-solid fa-check"></i>
-              <span>Guía digital con cronograma capilar de 4 semanas</span>
-            </li>
-            <li>
-              <i class="fa-solid fa-check"></i>
-              <span>Lista de ingredientes aptos y recomendados</span>
-            </li>
-          </ul>
-          <button class="btn btn-secondary tier-btn" onclick="openBookingModal('Diagnóstico & Plan de Transición')">
-            <span>Consultar y Agendar</span>
-            <i class="fa-solid fa-arrow-right"></i>
-          </button>
-        </div>
-
-        <!-- Tier 2 (Featured) -->
-        <div class="tier-card featured" id="tierCard2" data-tier="vip" data-future-price="120000">
-          <div class="tier-badge">Más Elegida</div>
-          <div class="tier-header">
-            <h3 class="tier-name">Asesoría VIP 1 a 1 & Taller</h3>
-            <p class="tier-tagline">Sesión interactiva en vivo con práctica de técnicas de definición, auditoría de productos y acompañamiento personalizado.</p>
-          </div>
-
-          <div class="tier-inquiry-box">
-            <span class="tier-inquiry-title"><i class="fa-solid fa-star"></i> Presencial o Virtual</span>
-            <span class="tier-inquiry-sub">Punto físico en Ciénaga (Magdalena) o Google Meet</span>
-          </div>
-
-          <ul class="tier-features-list">
-            <li class="highlight">
-              <i class="fa-solid fa-check"></i>
-              <span><strong>Sesión 1 a 1 interactiva</strong> (Presencial en Ciénaga o Virtual)</span>
-            </li>
-            <li class="highlight">
-              <i class="fa-solid fa-check"></i>
-              <span>Auditoría de todos los productos que tienes en casa</span>
-            </li>
-            <li>
-              <i class="fa-solid fa-check"></i>
-              <span>Taller práctico de definición de rizos y control de frizz en clima cálido</span>
-            </li>
-            <li>
-              <i class="fa-solid fa-check"></i>
-              <span>Diseño de rutina de lavado, nutrición y estilizado</span>
-            </li>
-            <li class="highlight">
-              <i class="fa-solid fa-check"></i>
-              <span><strong>Seguimiento directo vía WhatsApp por 30 días</strong></span>
-            </li>
-          </ul>
-          <button class="btn btn-primary tier-btn" onclick="openBookingModal('Asesoría VIP 1 a 1 & Taller')">
-            <i class="fa-regular fa-calendar-check"></i>
-            <span>Consultar y Reservar VIP</span>
-          </button>
-        </div>
-
-        <!-- Tier 3 (Familiar / Madres Cuidadoras) -->
-        <div class="tier-card" id="tierCard3" data-tier="familiar" data-future-price="150000">
-          <div class="tier-header">
-            <h3 class="tier-name">Asesoría Familiar & Niñas</h3>
-            <p class="tier-tagline">Diseñada para madres, padres y acudientes que desean aprender a cuidar las ondas y rizos de niñas y adolescentes.</p>
-          </div>
-
-          <div class="tier-inquiry-box">
-            <span class="tier-inquiry-title"><i class="fa-solid fa-hands-holding-child"></i> Enfoque Familiar</span>
-            <span class="tier-inquiry-sub">Presencial en Ciénaga o Virtual con la menor</span>
-          </div>
-
-          <ul class="tier-features-list">
-            <li class="highlight">
-              <i class="fa-solid fa-check"></i>
-              <span><strong>Técnicas de desenredo suave y sin dolor</strong> para niñas</span>
-            </li>
-            <li>
-              <i class="fa-solid fa-check"></i>
-              <span>Selección de fórmulas botánicas suaves sin químicos agresivos</span>
-            </li>
-            <li class="highlight">
-              <i class="fa-solid fa-check"></i>
-              <span>Peinados escolares protectores y mantenimiento nocturno</span>
-            </li>
-            <li>
-              <i class="fa-solid fa-check"></i>
-              <span>Educación en autoestima y orgullo por el cabello natural</span>
-            </li>
-            <li>
-              <i class="fa-solid fa-check"></i>
-              <span>Acompañamiento a la madre/cuidadora en la rutina</span>
-            </li>
-          </ul>
-          <button class="btn btn-secondary tier-btn" onclick="openBookingModal('Asesoría Familiar & Cuidadoras')">
-            <span>Consultar Asesoría Familiar</span>
-            <i class="fa-solid fa-arrow-right"></i>
-          </button>
         </div>
       </div>
     </div>
@@ -813,11 +1022,11 @@
       <div class="modal-body">
         <form id="bookingForm" onsubmit="handleBookingSubmit(event)">
           <div class="form-group">
-            <label class="form-label" for="bookPlan">Asesoría de Interés *</label>
+            <label class="form-label" for="bookPlan">Plan con Kit de Productos *</label>
             <select id="bookPlan" class="form-select" required>
-              <option value="Diagnóstico & Plan de Transición (Virtual)">Diagnóstico & Plan de Transición (Virtual Nacional)</option>
-              <option value="Asesoría VIP 1 a 1 & Taller" selected>Asesoría VIP 1 a 1 & Taller de Definición</option>
-              <option value="Asesoría Familiar & Cuidadoras">Asesoría Familiar & Niñas/Adolescentes</option>
+              <option value="Diagnóstico & Transición + Kit Dúo de Inicio ($79.000 COP)">Plan Diagnóstico & Transición + Kit Dúo de Inicio ($79.000 COP - Ahorras $28.000)</option>
+              <option value="Asesoría VIP 1 a 1 & Kit Completo 4 Productos ($155.000 COP)" selected>Plan VIP 1 a 1 + Kit Completo 4 Productos ($155.000 COP - Ahorras $57.000)</option>
+              <option value="Asesoría Familiar & Kit Cuidado Suave ($129.000 COP)">Plan Familiar & Niñas + Kit Cuidado Suave 3 Prods ($129.000 COP - Ahorras $43.000)</option>
             </select>
           </div>
 
@@ -869,6 +1078,227 @@
   </div>
 
   <!-- ==========================================================================
+       MODAL: FINALIZAR COMPRA & SIMULACIÓN DE PASARELA DE PAGOS
+       ========================================================================== -->
+  <div class="modal-overlay" id="checkoutModal">
+    <div class="modal-container checkout-modal-container">
+      <div class="modal-header">
+        <div class="modal-title-wrap">
+          <div class="checkout-secure-badge"><i class="fa-solid fa-shield-halved"></i> Pasarela de Pago Segura</div>
+          <h3 id="checkoutModalTitle">Finalizar Compra y Datos de Envío</h3>
+          <p id="checkoutModalSubtitle">Especifica tu dirección de entrega y correo para procesar la orden.</p>
+        </div>
+        <button class="modal-close-btn" onclick="closeCheckoutModal()" aria-label="Cerrar modal de compra">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <div class="modal-body">
+        <!-- VISTA 1: FORMULARIO DE COMPRA Y ENVÍO -->
+        <div id="checkoutFormView">
+          <!-- Resumen de Orden -->
+          <div class="checkout-order-summary" id="checkoutOrderSummary">
+            <div class="summary-top">
+              <span class="summary-label"><i class="fa-solid fa-receipt"></i> Resumen de tu pedido</span>
+              <span class="summary-badge-free"><i class="fa-solid fa-truck"></i> Envío Incluido</span>
+            </div>
+            <div class="summary-item-title" id="checkoutItemTitle">Cargando producto o plan...</div>
+            <div class="summary-item-desc" id="checkoutItemDesc">Detalle del paquete o productos</div>
+            <div class="summary-total-row">
+              <span>Total a Pagar:</span>
+              <strong id="checkoutTotalAmount" class="summary-total-price">$ 0 COP</strong>
+            </div>
+          </div>
+
+          <!-- Formulario de Envío y Facturación -->
+          <form id="checkoutOrderForm" onsubmit="handleCheckoutSubmit(event)">
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label" for="checkoutName">Nombre y Apellido *</label>
+                <input type="text" id="checkoutName" class="form-input" placeholder="Tu nombre completo" required>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="checkoutPhone">Teléfono / WhatsApp *</label>
+                <input type="tel" id="checkoutPhone" class="form-input" placeholder="Ej: 313 810 6274" required>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label" for="checkoutEmail">
+                  Correo Electrónico *
+                  <span class="label-help">(Para enlace y confirmación)</span>
+                </label>
+                <input type="email" id="checkoutEmail" class="form-input" placeholder="correo@ejemplo.com" required>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="checkoutCity">Ciudad / Municipio *</label>
+                <input type="text" id="checkoutCity" class="form-input" placeholder="Ej: Ciénaga, Santa Marta, Bogotá..." required>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="checkoutAddress">
+                Dirección de Residencia / Envío *
+                <span class="label-help">(Para entrega de tus productos físicos o kit)</span>
+              </label>
+              <input type="text" id="checkoutAddress" class="form-input" placeholder="Calle, Carrera, Número, Barrio, Conjunto/Apto..." required>
+            </div>
+
+            <div class="form-group" id="checkoutPlanFields" style="display: none;">
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label" for="checkoutModality">Modalidad de la Asesoría *</label>
+                  <select id="checkoutModality" class="form-select">
+                    <option value="Virtual (Videollamada Google Meet)" selected>Virtual (Videollamada en vivo)</option>
+                    <option value="Presencial en Ciénaga, Magdalena">Presencial en Ciénaga (Estudio botánico)</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="checkoutDate">Fecha Tentativa Preferida</label>
+                  <input type="date" id="checkoutDate" class="form-input">
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Medio de Pago Seguro</label>
+              <div class="payment-methods-grid">
+                <label class="payment-method-card active">
+                  <input type="radio" name="checkoutPaymentMethod" value="PSE / Cuentas Bancarias" checked>
+                  <div class="method-content">
+                    <i class="fa-solid fa-building-columns"></i>
+                    <strong>PSE / Bancos</strong>
+                    <span>Bancolombia, Davivienda...</span>
+                  </div>
+                </label>
+
+                <label class="payment-method-card">
+                  <input type="radio" name="checkoutPaymentMethod" value="Nequi / Daviplata">
+                  <div class="method-content">
+                    <i class="fa-solid fa-mobile-screen-button"></i>
+                    <strong>Nequi / Daviplata</strong>
+                    <span>Pago móvil directo</span>
+                  </div>
+                </label>
+
+                <label class="payment-method-card">
+                  <input type="radio" name="checkoutPaymentMethod" value="Tarjeta de Crédito / Débito">
+                  <div class="method-content">
+                    <i class="fa-regular fa-credit-card"></i>
+                    <strong>Tarjeta Débito/Crédito</strong>
+                    <span>Visa, Mastercard</span>
+                  </div>
+                </label>
+              </div>
+            </div>
+
+            <div class="checkout-actions">
+              <button type="submit" class="btn btn-primary btn-checkout-submit" id="btnSubmitPayment">
+                <i class="fa-solid fa-lock"></i>
+                <span id="btnSubmitPaymentText">Pagar Ahora</span>
+              </button>
+              <button type="button" class="btn btn-outline btn-sm" onclick="consultCurrentOrderViaWhatsApp()">
+                <i class="fa-brands fa-whatsapp" style="color: #25D366;"></i>
+                <span>Consultar antes de comprar por WhatsApp</span>
+              </button>
+            </div>
+          </form>
+        </div>
+
+        <!-- VISTA 2: PANTALLA DE PROCESAMIENTO Y COMPROBANTE DE PAGO -->
+        <div id="checkoutSimulationView" class="checkout-simulation-screen" style="display: none;">
+          <div class="sim-pulse-container">
+            <div class="sim-pulse-ring"></div>
+            <div class="sim-pulse-ring delay"></div>
+            <div class="sim-icon-center" id="simCenterIconWrap">
+              <i class="fa-solid fa-lock" id="simCenterIcon"></i>
+            </div>
+          </div>
+
+          <div class="sim-header-text">
+            <h3 class="sim-title" id="simTitle">Procesando Pago Seguro</h3>
+            <p class="sim-subtitle" id="simSubtitle">Por favor, espera un momento mientras validamos la transacción con tu entidad bancaria...</p>
+          </div>
+
+          <div class="sim-progress-wrap">
+            <div class="sim-progress-bar" id="simProgressBar"></div>
+          </div>
+
+          <div class="sim-steps-list">
+            <div class="sim-step-item done" id="simStep1">
+              <i class="fa-solid fa-circle-check"></i>
+              <span>Datos del comprador y dirección de envío validados</span>
+            </div>
+            <div class="sim-step-item active" id="simStep2">
+              <i class="fa-solid fa-spinner fa-spin"></i>
+              <span>Estableciendo conexión con PSE / Pasarela Bancaria</span>
+            </div>
+            <div class="sim-step-item pending" id="simStep3">
+              <i class="fa-regular fa-circle"></i>
+              <span>Procesando autorización bancaria...</span>
+            </div>
+          </div>
+
+          <!-- CONTENEDOR DEL COMPROBANTE Y ACCIONES (SE MUESTRA SÓLO TRAS APROBACIÓN) -->
+          <div id="checkoutReceiptContainer" class="checkout-receipt-container" style="display: none;">
+            <div class="sim-receipt-box" id="simReceiptBox">
+              <div class="receipt-header">
+                <span class="badge-approved" id="simStatusBadge"><i class="fa-solid fa-check"></i> TRANSACCIÓN APROBADA</span>
+                <strong id="simOrderRef">#ANC-2026-8910</strong>
+              </div>
+              <div class="receipt-rows">
+                <div class="receipt-row">
+                  <span>Cliente:</span>
+                  <strong id="simReceiptName">-</strong>
+                </div>
+                <div class="receipt-row">
+                  <span>Dirección de Envío:</span>
+                  <strong id="simReceiptAddress">-</strong>
+                </div>
+                <div class="receipt-row">
+                  <span>Correo de Confirmación:</span>
+                  <strong id="simReceiptEmail">-</strong>
+                </div>
+                <div class="receipt-row">
+                  <span>Método de Pago:</span>
+                  <strong id="simReceiptMethod">-</strong>
+                </div>
+                <div class="receipt-row total">
+                  <span>Total Pagado:</span>
+                  <strong id="simReceiptAmount" class="receipt-amount">$ 0 COP</strong>
+                </div>
+              </div>
+            </div>
+
+            <div class="checkout-success-notice">
+              <i class="fa-solid fa-circle-check"></i>
+              <span><strong>Pago Registrado con Éxito:</strong> Tu orden ha sido confirmada. Te contactaremos vía WhatsApp o correo para coordinar la entrega física o el enlace de tu sesión.</span>
+            </div>
+
+            <div class="sim-actions-group">
+              <button class="btn btn-primary" onclick="notifyOrderViaWhatsApp()">
+                <i class="fa-brands fa-whatsapp"></i>
+                <span>Enviar Comprobante por WhatsApp</span>
+              </button>
+              <button class="btn btn-outline btn-sm" onclick="closeCheckoutModal()">
+                <i class="fa-solid fa-arrow-left"></i>
+                <span>Volver a la Tienda</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="sim-trust-logos">
+            <span><i class="fa-solid fa-building-columns"></i> PSE</span>
+            <span><i class="fa-brands fa-cc-visa"></i> Visa</span>
+            <span><i class="fa-brands fa-cc-mastercard"></i> Mastercard</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
        CART / "¡LO QUIERO!" SLIDE DRAWER
        ========================================================================== -->
   <div class="cart-drawer-overlay" id="cartOverlay" onclick="closeCartDrawer()"></div>
@@ -897,11 +1327,15 @@
         <span style="font-size: 1.25rem; font-weight: 800; color: var(--primary);" id="cartTotalPriceLabel">$ 0</span>
       </div>
       <p class="cart-note">
-        <i class="fa-brands fa-whatsapp" style="color: #25D366;"></i> Coordinamos disponibilidad, asesoría y envío directo a tu WhatsApp: <strong>313 810 6274</strong>.
+        <i class="fa-solid fa-truck-fast" style="color: var(--primary);"></i> Envíos en Ciénaga y a toda Colombia. Pago seguro en línea o atención personalizada.
       </p>
-      <button class="btn btn-primary" style="width: 100%;" onclick="checkoutViaWhatsApp()">
+      <button class="btn btn-primary" style="width: 100%; margin-bottom: 0.55rem;" onclick="openCheckout('cart')">
+        <i class="fa-solid fa-lock"></i>
+        <span>Pagar Pedido en Línea</span>
+      </button>
+      <button class="btn btn-secondary btn-sm" style="width: 100%;" onclick="checkoutViaWhatsApp()">
         <i class="fa-brands fa-whatsapp"></i>
-        <span>¡Pedir por WhatsApp!</span>
+        <span>Consultar / Pedir por WhatsApp</span>
       </button>
       <button class="btn btn-secondary btn-sm" style="width: 100%; margin-top: 0.35rem;" onclick="clearCart()">
         <i class="fa-regular fa-trash-can"></i> Limpiar Lista
@@ -934,6 +1368,6 @@
   </a>
 
   <!-- Scripts -->
-  <script src="app.js?v=2.5"></script>
+  <script src="app.js?v=2.9"></script>
 </body>
 </html>
